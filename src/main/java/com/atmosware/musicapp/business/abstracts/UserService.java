@@ -1,4 +1,4 @@
 package com.atmosware.musicapp.business.abstracts;
 
-public interface Test {
+public interface UserService {
 }
