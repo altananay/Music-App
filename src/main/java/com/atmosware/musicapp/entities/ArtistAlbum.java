@@ -1,9 +1,7 @@
 package com.atmosware.musicapp.entities;
 
 import com.atmosware.musicapp.entities.base.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +15,9 @@ import java.util.UUID;
 @Setter
 @Entity
 public class ArtistAlbum extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "artist_id")
