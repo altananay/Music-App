@@ -17,9 +17,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "albums")
 public class Album extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     private String name;
     private String year;
 }

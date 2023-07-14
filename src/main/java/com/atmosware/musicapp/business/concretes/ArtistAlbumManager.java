@@ -13,6 +13,7 @@ import com.atmosware.musicapp.repository.ArtistAlbumRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +40,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     public CreateArtistAlbumResponse add(CreateArtistAlbumRequest request) {
         ArtistAlbum album = mapper.forRequest().map(request, ArtistAlbum.class);
         album.setId(UUID.randomUUID());
+        album.setCreatedAt(LocalDateTime.now());
         ArtistAlbum createdArtistAlbum = repository.save(album);
         CreateArtistAlbumResponse response = mapper.forResponse().map(createdArtistAlbum, CreateArtistAlbumResponse.class);
         return response;
@@ -46,8 +48,11 @@ public class ArtistAlbumManager implements ArtistAlbumService {
 
     @Override
     public UpdateArtistAlbumResponse update(UUID id, UpdateArtistAlbumRequest request) {
+        ArtistAlbum oldArtistAlbum = mapper.forRequest().map(getById(id), ArtistAlbum.class);
         ArtistAlbum album = mapper.forRequest().map(request, ArtistAlbum.class);
         album.setId(id);
+        album.setCreatedAt(oldArtistAlbum.getCreatedAt());
+        album.setUpdatedAt(LocalDateTime.now());
         repository.save(album);
         UpdateArtistAlbumResponse response = mapper.forResponse().map(album, UpdateArtistAlbumResponse.class);
         return response;

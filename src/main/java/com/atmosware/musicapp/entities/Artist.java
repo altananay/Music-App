@@ -16,9 +16,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "artists")
 public class Artist extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     private String firstName;
     private String lastName;
 }

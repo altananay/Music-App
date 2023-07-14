@@ -15,10 +15,6 @@ import java.util.UUID;
 @Setter
 @Entity
 public class ArtistSong extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artistId;

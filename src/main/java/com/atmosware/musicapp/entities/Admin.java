@@ -17,9 +17,6 @@ import java.util.UUID;
 @Entity
 @Table(name="admins")
 public class Admin extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     private String firstName;
     private String lastName;
     private String email;
