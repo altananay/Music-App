@@ -14,8 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class GetAllArtistsResponse {
     private UUID id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

@@ -1,17 +1,15 @@
-package com.atmosware.musicapp.business.dto.requests.update;
+package com.atmosware.musicapp.core.utils.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateArtistRequest {
-    private UUID id;
-    private String name;
+public class AuthenticationRequest {
+    private String email;
+    private String password;
 }

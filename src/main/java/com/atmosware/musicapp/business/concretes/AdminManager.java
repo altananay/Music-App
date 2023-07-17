@@ -65,4 +65,9 @@ public class AdminManager implements AdminService {
     public void delete(UUID id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public String getUsernameByUsername(String username) {
+        return repository.findByUsername(username);
+    }
 }

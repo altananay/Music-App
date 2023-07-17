@@ -16,6 +16,5 @@ import java.util.UUID;
 @Entity
 @Table(name = "artists")
 public class Artist extends BaseEntity {
-    private String firstName;
-    private String lastName;
+    private String name;
 }
