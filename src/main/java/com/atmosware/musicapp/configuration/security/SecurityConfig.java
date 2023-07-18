@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -25,6 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http.csrf().disable().authorizeHttpRequests().requestMatchers("/admin/auth/**", "/admins/**",
+         "/admin/auth/authenticate", "/popularsongs", "/popularsongs/**",
          "/v2/api-docs",
          "/v3/api-docs",
          "/v3/api-docs/**",
@@ -34,7 +36,7 @@ public class SecurityConfig {
          "/configuration/security",
          "/swagger-ui/**",
          "/webjars/**",
-         "/swagger-ui.html").permitAll().requestMatchers(HttpMethod.GET, "/songs", "/artistsongs", "/artists","/artistalbums", "/albums").permitAll().requestMatchers("/songs/**", "/albums/**", "/artists/**").hasAnyRole("ADMIN").anyRequest()
+         "/swagger-ui.html").permitAll().requestMatchers(HttpMethod.GET, "/songs", "/artistsongs", "/artists","/artistalbums", "/albums").permitAll().requestMatchers("/songs/**", "/albums/**", "/artists/**").hasRole("ADMIN").anyRequest()
                 .authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
