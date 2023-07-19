@@ -37,13 +37,14 @@ public class SongsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @RolesAllowed("ROLE_ADMIN")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public CreateSongResponse add(@RequestBody CreateSongRequest request)
     {
         return service.add(request);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public UpdateSongResponse update(@PathVariable UUID id, @RequestBody UpdateSongRequest request)
     {
         return service.update(id, request);
@@ -51,6 +52,7 @@ public class SongsController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable UUID id) {
         service.delete(id);
     }

@@ -9,6 +9,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllAlbumsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateAlbumResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,12 +35,14 @@ public class AlbumsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public CreateAlbumResponse add(@RequestBody CreateAlbumRequest request)
     {
         return service.add(request);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public UpdateAlbumResponse update(@PathVariable UUID id, @RequestBody UpdateAlbumRequest request)
     {
         return service.update(id, request);
@@ -47,6 +50,7 @@ public class AlbumsController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable UUID id) {
         service.delete(id);
     }

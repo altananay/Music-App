@@ -11,5 +11,4 @@ public interface AdminRepository extends JpaRepository<Admin, UUID> {
     Admin findByEmail(String email);
     @Query("SELECT a.username from Admin a where a.username =?1")
     String findByUsername(String username);
-    Admin getByUsername(String username);
 }
