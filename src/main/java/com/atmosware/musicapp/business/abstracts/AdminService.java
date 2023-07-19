@@ -16,5 +16,4 @@ public interface AdminService {
     CreateAdminResponse add(CreateAdminRequest request);
     UpdateAdminResponse update(UUID id, UpdateAdminRequest request);
     void delete(UUID id);
-    String getUsernameByUsername(String username);
 }

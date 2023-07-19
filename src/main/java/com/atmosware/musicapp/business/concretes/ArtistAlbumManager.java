@@ -7,6 +7,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateArtistAlbumRes
 import com.atmosware.musicapp.business.dto.responses.get.GetAllArtistAlbumsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetArtistAlbumResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateArtistAlbumResponse;
+import com.atmosware.musicapp.business.rules.ArtistAlbumBusinessRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.ArtistAlbum;
 import com.atmosware.musicapp.repository.ArtistAlbumRepository;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class ArtistAlbumManager implements ArtistAlbumService {
     private final ArtistAlbumRepository repository;
     private final ModelMapperService mapper;
+    private final ArtistAlbumBusinessRules rules;
     @Override
     public List<GetAllArtistAlbumsResponse> getAll() {
         List<ArtistAlbum> albums = repository.findAll();
@@ -31,6 +33,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
 
     @Override
     public GetArtistAlbumResponse getById(UUID id) {
+        rules.CheckIfArtistAlbumExists(id);
         ArtistAlbum album = repository.findById(id).orElseThrow();
         GetArtistAlbumResponse response = mapper.forResponse().map(album, GetArtistAlbumResponse.class);
         return response;
@@ -48,6 +51,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
 
     @Override
     public UpdateArtistAlbumResponse update(UUID id, UpdateArtistAlbumRequest request) {
+        rules.CheckIfArtistAlbumExists(id);
         ArtistAlbum oldArtistAlbum = mapper.forRequest().map(getById(id), ArtistAlbum.class);
         ArtistAlbum album = mapper.forRequest().map(request, ArtistAlbum.class);
         album.setId(id);
@@ -60,6 +64,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
 
     @Override
     public void delete(UUID id) {
+        rules.CheckIfArtistAlbumExists(id);
         repository.deleteById(id);
     }
 }

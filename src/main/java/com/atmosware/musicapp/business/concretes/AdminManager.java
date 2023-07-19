@@ -7,6 +7,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllAdminsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateAdminResponse;
+import com.atmosware.musicapp.business.rules.AdminBusinessRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.Admin;
 import com.atmosware.musicapp.entities.enums.Role;
@@ -23,6 +24,8 @@ import java.util.UUID;
 public class AdminManager implements AdminService {
     private final AdminRepository repository;
     private final ModelMapperService mapper;
+    private final AdminBusinessRules rules;
+
     @Override
     public List<GetAllAdminsResponse> getAll() {
         List<Admin> admins = repository.findAll();
@@ -32,6 +35,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public GetAdminResponse getById(UUID id) {
+        rules.CheckIfAdminExists(id);
         Admin admin = repository.findById(id).orElseThrow();
         GetAdminResponse response = mapper.forResponse().map(admin, GetAdminResponse.class);
         return response;
@@ -50,6 +54,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public UpdateAdminResponse update(UUID id, UpdateAdminRequest request) {
+        rules.CheckIfAdminExists(id);
         Admin oldAdmin = mapper.forRequest().map(getById(id), Admin.class);
         Admin newAdmin = mapper.forRequest().map(request, Admin.class);
         newAdmin.setId(id);
@@ -63,11 +68,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public void delete(UUID id) {
+        rules.CheckIfAdminExists(id);
         repository.deleteById(id);
-    }
-
-    @Override
-    public String getUsernameByUsername(String username) {
-        return repository.findByUsername(username);
     }
 }

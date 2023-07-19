@@ -7,21 +7,22 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateArtistResponse
 import com.atmosware.musicapp.business.dto.responses.get.GetAllArtistsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetArtistResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateArtistResponse;
+import com.atmosware.musicapp.business.rules.ArtistBusinessRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.Artist;
 import com.atmosware.musicapp.repository.ArtistRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class ArtistManager implements ArtistService {
     private final ArtistRepository repository;
     private final ModelMapperService mapper;
+    private final ArtistBusinessRules rules;
     @Override
     public List<GetAllArtistsResponse> getAll() {
         List<Artist> artists = repository.findAll();
@@ -31,6 +32,7 @@ public class ArtistManager implements ArtistService {
 
     @Override
     public GetArtistResponse getById(UUID id) {
+        rules.CheckIfArtistExists(id);
         Artist artist = repository.findById(id).orElseThrow();
         GetArtistResponse response = mapper.forResponse().map(artist, GetArtistResponse.class);
         return response;
@@ -48,6 +50,7 @@ public class ArtistManager implements ArtistService {
 
     @Override
     public UpdateArtistResponse update(UUID id, UpdateArtistRequest request) {
+        rules.CheckIfArtistExists(id);
         Artist oldArtist = mapper.forRequest().map(getById(id), Artist.class);
         Artist artist = mapper.forRequest().map(request, Artist.class);
         artist.setId(id);
@@ -60,6 +63,7 @@ public class ArtistManager implements ArtistService {
 
     @Override
     public void delete(UUID id) {
+        rules.CheckIfArtistExists(id);
         repository.deleteById(id);
     }
 }

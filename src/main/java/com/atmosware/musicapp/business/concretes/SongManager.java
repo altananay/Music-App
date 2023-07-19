@@ -7,6 +7,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateSongResponse;
+import com.atmosware.musicapp.business.rules.SongBusinessRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.Song;
 import com.atmosware.musicapp.repository.SongRepository;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class SongManager implements SongService {
     private final SongRepository repository;
     private final ModelMapperService mapper;
+    private final SongBusinessRules rules;
     @Override
     public List<GetAllSongsResponse> getAll() {
         List<Song> songs = repository.findAll();
@@ -31,6 +33,7 @@ public class SongManager implements SongService {
 
     @Override
     public GetSongResponse getById(UUID id) {
+        rules.CheckIfSongExists(id);
         Song song = repository.findById(id).orElseThrow();
         GetSongResponse response = mapper.forResponse().map(song, GetSongResponse.class);
         return response;
@@ -48,6 +51,7 @@ public class SongManager implements SongService {
 
     @Override
     public UpdateSongResponse update(UUID id, UpdateSongRequest request) {
+        rules.CheckIfSongExists(id);
         Song oldSong = mapper.forRequest().map(getById(id), Song.class);
         Song song = mapper.forRequest().map(request, Song.class);
         song.setId(id);
@@ -60,6 +64,7 @@ public class SongManager implements SongService {
 
     @Override
     public void delete(UUID id) {
+        rules.CheckIfSongExists(id);
         repository.deleteById(id);
     }
 }

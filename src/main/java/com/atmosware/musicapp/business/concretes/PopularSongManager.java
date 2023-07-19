@@ -7,6 +7,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreatePopularSongRes
 import com.atmosware.musicapp.business.dto.responses.get.GetAllPopularSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdatePopularSongResponse;
+import com.atmosware.musicapp.business.rules.PopularSongBusinessRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.PopularSong;
 import com.atmosware.musicapp.repository.PopularSongRepository;
@@ -23,6 +24,7 @@ public class PopularSongManager implements PopularSongService {
 
     private final PopularSongRepository repository;
     private final ModelMapperService mapperService;
+    private final PopularSongBusinessRules rules;
 
     @Override
     public CreatePopularSongResponse add(CreatePopularSongRequest request) {
@@ -36,6 +38,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public GetPopularSongResponse getById(UUID id) {
+        rules.CheckIfPopularSongExists(id);
         PopularSong popularSong = repository.findById(id).orElseThrow();
         GetPopularSongResponse response = mapperService.forResponse().map(popularSong, GetPopularSongResponse.class);
         return response;
@@ -43,6 +46,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public UpdatePopularSongResponse update(UUID id, UpdatePopularSongRequest request) {
+        rules.CheckIfPopularSongExists(id);
         PopularSong oldPopularSong = mapperService.forRequest().map(getById(id), PopularSong.class);
         PopularSong popularSong = mapperService.forRequest().map(request, PopularSong.class);
         popularSong.setId(id);
@@ -55,6 +59,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public void delete(UUID id) {
+        rules.CheckIfPopularSongExists(id);
         repository.deleteById(id);
     }
 
