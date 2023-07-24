@@ -25,11 +25,15 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http.cors().and()
+    http.cors()
+        .and().csrf().disable()
         .authorizeHttpRequests()
         .requestMatchers(
             "/admin/auth/**",
             "/admins/**",
+            "/actuator/prometheus",
+            "/actuator/**",
+            "/actuator",
             "/user/auth/**",
             "/users/**",
             "/admin/auth/authenticate",
@@ -47,13 +51,21 @@ public class SecurityConfig {
             "/swagger-ui.html")
         .permitAll()
         .requestMatchers(
-            HttpMethod.GET, "/songs", "/artistsongs", "/artists", "/artistalbums", "/albums", "/users/**")
+            HttpMethod.GET,
+            "/songs",
+            "/artistsongs",
+            "/artists",
+            "/artistalbums",
+            "/albums",
+            "/users/**")
         .permitAll()
         .requestMatchers("/songs/**", "/albums/**", "/artists/**")
         .hasAnyAuthority("ROLE_ADMIN")
         .anyRequest()
         .authenticated()
-        .and().csrf().disable()
+        .and()
+        .csrf()
+        .disable()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()

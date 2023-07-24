@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds.
+
+rule_files:
+#  - "alert.rules.yml"
+#  - "rules.yml"
+
+scrape_configs:
+  - job_name: 'spring-actuator'
+    honor_labels: true
+    scrape_interval: 5s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8080' ]
+
+  - job_name: 'prometheus'
+    honor_labels: true
+    scrape_interval: 5s
+    static_configs:
+        - targets: [ 'localhost:9090' ]
