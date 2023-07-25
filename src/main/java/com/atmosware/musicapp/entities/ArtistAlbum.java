@@ -18,9 +18,9 @@ public class ArtistAlbum extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "artist_id")
-    private Artist artistId;
+    private Artist artist;
 
     @ManyToOne
     @JoinColumn(name = "album_id")
-    private Album albumId;
+    private Album album;
 }

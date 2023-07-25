@@ -16,8 +16,8 @@ public class CreateUserResponse {
     private UUID id;
     private String firstName;
     private String lastName;
+    private String username;
     private String email;
-    private String password;
     private String role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -1,23 +1,24 @@
 package com.atmosware.musicapp.entities;
 
 import com.atmosware.musicapp.entities.base.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class ArtistSong extends BaseEntity {
+public class UserFavoriteSong extends BaseEntity {
+    
     @ManyToOne
-    @JoinColumn(name = "artist_id")
-    private Artist artist;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "song_id")

@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/artistalbums")
+@RequestMapping("/artistAlbums")
 public class ArtistAlbumsController {
     private final ArtistAlbumService service;
 

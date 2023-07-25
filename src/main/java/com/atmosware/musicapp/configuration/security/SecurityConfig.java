@@ -25,10 +25,11 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http.cors()
-        .and().csrf().disable()
+    http.cors().and().csrf().disable()
         .authorizeHttpRequests()
         .requestMatchers(
+                "/usersFavoriteSongs/**",
+            "/usersFavoriteSongs",
             "/admin/auth/**",
             "/admins/**",
             "/actuator/prometheus",
@@ -37,8 +38,8 @@ public class SecurityConfig {
             "/user/auth/**",
             "/users/**",
             "/admin/auth/authenticate",
-            "/popularsongs",
-            "/popularsongs/**",
+            "/popularSongs",
+            "/popularSongs/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -53,19 +54,17 @@ public class SecurityConfig {
         .requestMatchers(
             HttpMethod.GET,
             "/songs",
-            "/artistsongs",
+            "/artistSongs",
             "/artists",
-            "/artistalbums",
+            "/artistAlbums",
             "/albums",
-            "/users/**")
+            "/users/**", "/usersFavoriteSongs/**")
         .permitAll()
         .requestMatchers("/songs/**", "/albums/**", "/artists/**")
         .hasAnyAuthority("ROLE_ADMIN")
         .anyRequest()
         .authenticated()
         .and()
-        .csrf()
-        .disable()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()

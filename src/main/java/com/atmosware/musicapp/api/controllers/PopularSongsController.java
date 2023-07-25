@@ -2,24 +2,21 @@ package com.atmosware.musicapp.api.controllers;
 
 
 import com.atmosware.musicapp.business.abstracts.PopularSongService;
-import com.atmosware.musicapp.business.dto.requests.create.CreateAdminRequest;
 import com.atmosware.musicapp.business.dto.requests.create.CreatePopularSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdatePopularSongRequest;
-import com.atmosware.musicapp.business.dto.responses.create.CreateAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.create.CreatePopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllPopularSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdatePopularSongResponse;
+import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
-
 @RestController
 @AllArgsConstructor
-@RequestMapping("/popularsongs")
+@RequestMapping("/popularSongs")
 public class PopularSongsController {
 
     private final PopularSongService service;
