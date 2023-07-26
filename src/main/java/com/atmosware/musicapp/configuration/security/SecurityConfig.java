@@ -30,6 +30,7 @@ public class SecurityConfig {
         .requestMatchers(
                 "/usersFollowers/**",
                 "/usersFavoriteSongs/**",
+            "/styles/**",
             "/usersFavoriteSongs",
             "/admin/auth/**",
             "/admins/**",
