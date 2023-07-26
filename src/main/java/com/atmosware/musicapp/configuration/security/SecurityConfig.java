@@ -25,11 +25,16 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http.cors().and().csrf().disable()
+    http.cors()
+        .and()
+        .csrf()
+        .disable()
         .authorizeHttpRequests()
         .requestMatchers(
-                "/usersFollowers/**",
-                "/usersFavoriteSongs/**",
+            "/usersFollowers/**",
+            "/usersFavoriteSongs/**",
+            "/songsStyles/**",
+            "/songsStyles",
             "/styles/**",
             "/usersFavoriteSongs",
             "/admin/auth/**",
@@ -60,7 +65,8 @@ public class SecurityConfig {
             "/artists",
             "/artistAlbums",
             "/albums",
-            "/users/**", "/usersFavoriteSongs/**")
+            "/users/**",
+            "/usersFavoriteSongs/**")
         .permitAll()
         .requestMatchers("/songs/**", "/albums/**", "/artists/**")
         .hasAnyAuthority("ROLE_ADMIN")
