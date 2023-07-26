@@ -8,12 +8,11 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllAdminsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateAdminResponse;
 import com.atmosware.musicapp.repository.AdminRepository;
+import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @AllArgsConstructor

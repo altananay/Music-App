@@ -28,6 +28,7 @@ public class SecurityConfig {
     http.cors().and().csrf().disable()
         .authorizeHttpRequests()
         .requestMatchers(
+                "/usersFollowers/**",
                 "/usersFavoriteSongs/**",
             "/usersFavoriteSongs",
             "/admin/auth/**",
