@@ -34,7 +34,7 @@ public class UserManager implements UserService {
 
     @Override
     public GetUserResponse getById(UUID id) {
-        rules.CheckIfUserExists(id);
+        rules.checkIfUserExists(id);
         User user = repository.findById(id).orElseThrow();
         GetUserResponse response = mapper.forResponse().map(user, GetUserResponse.class);
         return response;
@@ -53,7 +53,7 @@ public class UserManager implements UserService {
 
     @Override
     public UpdateUserResponse update(UUID id, UpdateUserRequest request) {
-        rules.CheckIfUserExists(id);
+        rules.checkIfUserExists(id);
         User oldUser = mapper.forRequest().map(getById(id), User.class);
         User user = mapper.forRequest().map(request, User.class);
         user.setId(id);
@@ -67,7 +67,7 @@ public class UserManager implements UserService {
 
     @Override
     public void delete(UUID id) {
-        rules.CheckIfUserExists(id);
+        rules.checkIfUserExists(id);
         repository.deleteById(id);
     }
 }

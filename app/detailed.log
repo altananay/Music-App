@@ -73,3 +73,77 @@
 2023-07-26 14:40:24,733 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
 2023-07-26 14:40:30,582 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
 2023-07-26 14:40:33,415 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.144 seconds (process running for 10.268)
+2023-07-26 15:15:38,849 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 22844 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:15:38,852 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:15:38,853 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:15:45,180 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 15:15:48,232 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.841 seconds (process running for 10.959)
+2023-07-26 15:16:43,072 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 4992 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:16:43,075 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:16:43,076 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:16:49,266 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 15:16:52,254 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.656 seconds (process running for 10.821)
+2023-07-26 15:53:02,759 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 19552 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:53:02,761 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:53:02,762 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:53:09,442 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 15:53:12,557 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 10.349 seconds (process running for 11.69)
+2023-07-26 15:54:19,955 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 12424 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:54:19,958 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:54:19,959 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:54:25,671 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 15:54:28,522 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.024 seconds (process running for 10.115)
+2023-07-26 15:56:47,572 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 14972 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:56:47,574 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:56:47,575 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:56:53,578 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 15:56:56,487 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.411 seconds (process running for 10.821)
+2023-07-26 15:57:51,779 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 3048 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:57:51,781 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:57:51,782 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:57:58,080 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 15:58:01,210 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.892 seconds (process running for 10.984)
+2023-07-26 15:59:58,995 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 26676 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 15:59:58,997 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 15:59:58,998 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 16:00:04,955 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 16:00:07,920 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.435 seconds (process running for 10.665)
+2023-07-26 16:04:47,506 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 14856 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 16:04:47,509 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 16:04:47,510 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 16:04:53,871 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 16:04:56,763 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.768 seconds (process running for 11.054)
+2023-07-26 16:12:12,745 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 15348 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 16:12:12,748 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 16:12:12,749 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 16:12:18,809 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 16:12:22,407 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 10.138 seconds (process running for 11.29)
+2023-07-26 16:23:09,270 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 14028 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 16:23:09,272 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 16:23:09,273 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 16:23:15,158 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 16:23:18,139 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.326 seconds (process running for 10.435)
+2023-07-26 17:03:16,597 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 28124 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 17:03:16,600 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 17:03:16,601 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 17:03:22,795 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 17:03:25,836 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.723 seconds (process running for 10.898)
+2023-07-26 17:05:35,219 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 19492 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 17:05:35,221 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 17:05:35,222 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 17:05:41,764 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 17:05:47,229 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 12.551 seconds (process running for 14.74)
+2023-07-26 17:06:29,660 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 17740 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 17:06:29,662 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 17:06:29,663 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 17:06:36,220 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 17:06:42,240 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 13.144 seconds (process running for 14.765)
+2023-07-26 17:12:32,408 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 13180 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 17:12:32,411 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 17:12:32,413 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 17:12:39,226 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use
+2023-07-26 17:12:44,381 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 12.597 seconds (process running for 14.028)
+2023-07-26 17:14:00,260 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 28592 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-07-26 17:14:00,263 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-07-26 17:14:00,264 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-26 17:14:06,924 DEBUG org.springframework.web.filter.GenericFilterBean [restartedMain] Filter 'jwtAuthenticationFilter' configured for use

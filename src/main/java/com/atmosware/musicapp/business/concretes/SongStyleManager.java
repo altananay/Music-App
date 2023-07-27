@@ -40,6 +40,16 @@ public class SongStyleManager implements SongStyleService {
   }
 
   @Override
+  public List<GetAllSongsStylesResponse> getAllByStyleId(UUID id) {
+    List<SongStyle> songStyles = repository.getByStyleId(id);
+    List<GetAllSongsStylesResponse> responses =
+            songStyles.stream()
+                    .map(songStyle -> mapper.forResponse().map(songStyle, GetAllSongsStylesResponse.class))
+                    .toList();
+    return responses;
+  }
+
+  @Override
   public GetSongStyleResponse getById(UUID id) {
     rules.checkIfSongStyleExists(id);
     SongStyle songStyle = repository.findById(id).orElseThrow();

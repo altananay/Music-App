@@ -25,6 +25,11 @@ public class SongsStylesController {
     return service.getAll();
   }
 
+  @GetMapping("/getAllByStyleId/{id}")
+  public List<GetAllSongsStylesResponse> getAll(@PathVariable UUID id) {
+    return service.getAllByStyleId(id);
+  }
+
   @GetMapping("/{id}")
   public GetSongStyleResponse getById(@PathVariable UUID id) {
     return service.getById(id);

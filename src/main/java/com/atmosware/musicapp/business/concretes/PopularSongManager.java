@@ -38,7 +38,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public GetPopularSongResponse getById(UUID id) {
-        rules.CheckIfPopularSongExists(id);
+        rules.checkIfPopularSongExists(id);
         PopularSong popularSong = repository.findById(id).orElseThrow();
         GetPopularSongResponse response = mapperService.forResponse().map(popularSong, GetPopularSongResponse.class);
         return response;
@@ -46,7 +46,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public UpdatePopularSongResponse update(UUID id, UpdatePopularSongRequest request) {
-        rules.CheckIfPopularSongExists(id);
+        rules.checkIfPopularSongExists(id);
         PopularSong oldPopularSong = mapperService.forRequest().map(getById(id), PopularSong.class);
         PopularSong popularSong = mapperService.forRequest().map(request, PopularSong.class);
         popularSong.setId(id);
@@ -59,7 +59,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public void delete(UUID id) {
-        rules.CheckIfPopularSongExists(id);
+        rules.checkIfPopularSongExists(id);
         repository.deleteById(id);
     }
 

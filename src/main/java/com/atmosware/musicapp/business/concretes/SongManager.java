@@ -33,7 +33,7 @@ public class SongManager implements SongService {
 
     @Override
     public GetSongResponse getById(UUID id) {
-        rules.CheckIfSongExists(id);
+        rules.checkIfSongExists(id);
         Song song = repository.findById(id).orElseThrow();
         GetSongResponse response = mapper.forResponse().map(song, GetSongResponse.class);
         return response;
@@ -51,7 +51,7 @@ public class SongManager implements SongService {
 
     @Override
     public UpdateSongResponse update(UUID id, UpdateSongRequest request) {
-        rules.CheckIfSongExists(id);
+        rules.checkIfSongExists(id);
         Song oldSong = mapper.forRequest().map(getById(id), Song.class);
         Song song = mapper.forRequest().map(request, Song.class);
         song.setId(id);
@@ -64,7 +64,7 @@ public class SongManager implements SongService {
 
     @Override
     public void delete(UUID id) {
-        rules.CheckIfSongExists(id);
+        rules.checkIfSongExists(id);
         repository.deleteById(id);
     }
 }

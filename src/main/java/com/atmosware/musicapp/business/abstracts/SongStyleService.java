@@ -11,6 +11,7 @@ import java.util.UUID;
 
 public interface SongStyleService {
     List<GetAllSongsStylesResponse> getAll();
+    List<GetAllSongsStylesResponse> getAllByStyleId(UUID id);
     GetSongStyleResponse getById(UUID id);
     CreateSongStyleResponse add(CreateSongStyleRequest request);
     UpdateSongStyleResponse update(UUID id, UpdateSongStyleRequest request);

@@ -51,7 +51,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   @Override
   public GetUserFavoriteSongResponse getById(UUID id) {
-    rules.CheckIfUserFavoriteSongExists(id);
+    rules.checkIfUserFavoriteSongExists(id);
     UserFavoriteSong userFavoriteSong = repository.findById(id).orElseThrow();
     GetUserFavoriteSongResponse response =
         mapper.forResponse().map(userFavoriteSong, GetUserFavoriteSongResponse.class);
@@ -71,7 +71,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   @Override
   public UpdateUserFavoriteSongResponse update(UUID id, UpdateUserFavoriteSongRequest request) {
-    rules.CheckIfUserFavoriteSongExists(id);
+    rules.checkIfUserFavoriteSongExists(id);
     UserFavoriteSong oldUserFavoriteSong =
         mapper.forRequest().map(getById(id), UserFavoriteSong.class);
     UserFavoriteSong newUserFavoriteSong = mapper.forRequest().map(request, UserFavoriteSong.class);
@@ -86,7 +86,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   @Override
   public void delete(UUID id) {
-    rules.CheckIfUserFavoriteSongExists(id);
+    rules.checkIfUserFavoriteSongExists(id);
     repository.deleteById(id);
   }
 }

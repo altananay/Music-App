@@ -33,7 +33,7 @@ public class ArtistSongManager implements ArtistSongService {
 
     @Override
     public GetArtistSongResponse getById(UUID id) {
-        rules.CheckIfArtistSongExists(id);
+        rules.checkIfArtistSongExists(id);
         ArtistSong artistSong = repository.findById(id).orElseThrow();
         GetArtistSongResponse response = mapper.forResponse().map(artistSong, GetArtistSongResponse.class);
         return response;
@@ -51,7 +51,7 @@ public class ArtistSongManager implements ArtistSongService {
 
     @Override
     public UpdateArtistSongResponse update(UUID id, UpdateArtistSongRequest request) {
-        rules.CheckIfArtistSongExists(id);
+        rules.checkIfArtistSongExists(id);
         ArtistSong oldArtistSong = mapper.forRequest().map(getById(id), ArtistSong.class);
         ArtistSong artistSong = mapper.forRequest().map(request, ArtistSong.class);
         artistSong.setId(id);
@@ -64,7 +64,7 @@ public class ArtistSongManager implements ArtistSongService {
 
     @Override
     public void delete(UUID id) {
-        rules.CheckIfArtistSongExists(id);
+        rules.checkIfArtistSongExists(id);
         repository.deleteById(id);
     }
 }

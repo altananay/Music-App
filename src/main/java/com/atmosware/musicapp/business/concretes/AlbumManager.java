@@ -36,7 +36,7 @@ public class AlbumManager implements AlbumService {
 
     @Override
     public GetAlbumResponse getById(UUID id) {
-        rules.CheckIfAlbumExists(id);
+        rules.checkIfAlbumExists(id);
         Album album = repository.findById(id).orElseThrow();
         GetAlbumResponse response = mapper.forResponse().map(album, GetAlbumResponse.class);
         return response;
@@ -54,7 +54,7 @@ public class AlbumManager implements AlbumService {
 
     @Override
     public UpdateAlbumResponse update(UUID id, UpdateAlbumRequest request) {
-        rules.CheckIfAlbumExists(id);
+        rules.checkIfAlbumExists(id);
         Album oldAlbum = mapper.forRequest().map(getById(id), Album.class);
         Album album = mapper.forRequest().map(request, Album.class);
         album.setId(id);
@@ -67,7 +67,7 @@ public class AlbumManager implements AlbumService {
 
     @Override
     public void delete(UUID id) {
-        rules.CheckIfAlbumExists(id);
+        rules.checkIfAlbumExists(id);
         repository.deleteById(id);
     }
 }

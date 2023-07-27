@@ -35,7 +35,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public GetAdminResponse getById(UUID id) {
-        rules.CheckIfAdminExists(id);
+        rules.checkIfAdminExists(id);
         Admin admin = repository.findById(id).orElseThrow();
         GetAdminResponse response = mapper.forResponse().map(admin, GetAdminResponse.class);
         return response;
@@ -54,7 +54,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public UpdateAdminResponse update(UUID id, UpdateAdminRequest request) {
-        rules.CheckIfAdminExists(id);
+        rules.checkIfAdminExists(id);
         Admin oldAdmin = mapper.forRequest().map(getById(id), Admin.class);
         Admin newAdmin = mapper.forRequest().map(request, Admin.class);
         newAdmin.setId(id);
@@ -68,7 +68,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public void delete(UUID id) {
-        rules.CheckIfAdminExists(id);
+        rules.checkIfAdminExists(id);
         repository.deleteById(id);
     }
 }
