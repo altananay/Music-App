@@ -1,6 +1,7 @@
 package com.atmosware.musicapp.business.concretes;
 
 import com.atmosware.musicapp.business.abstracts.UserAuthenticationService;
+import com.atmosware.musicapp.common.constants.Messages;
 import com.atmosware.musicapp.core.security.jwt.JwtService;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationRequest;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationResponse;
@@ -10,12 +11,11 @@ import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.User;
 import com.atmosware.musicapp.entities.enums.Role;
 import com.atmosware.musicapp.repository.UserRepository;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +34,7 @@ public class UserAuthenticationManager implements UserAuthenticationService {
         user.setCreatedAt(LocalDateTime.now());
         repository.save(user);
         RegisterResponse response = new RegisterResponse();
-        response.setResult("Başarıyla kayıt oldunuz");
+        response.setResult(Messages.Authentication.RegisterSuccessful);
         return response;
     }
 
@@ -44,10 +44,10 @@ public class UserAuthenticationManager implements UserAuthenticationService {
         HashMap<String, Object> payload = new HashMap<>();
         for (var role: user.getAuthorities())
         {
-            payload.put("roles", role.toString());
+            payload.put(Messages.JwtPayload.Roles, role.toString());
         }
-        payload.put("email", request.getEmail());
+        payload.put(Messages.JwtPayload.Email, request.getEmail());
         var jwtToken = jwtService.generateToken(payload, user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder().token(jwtToken).result(Messages.Authentication.AuthSuccessful).build();
     }
 }

@@ -1,6 +1,7 @@
 package com.atmosware.musicapp.business.concretes;
 
 import com.atmosware.musicapp.business.abstracts.AdminAuthenticationService;
+import com.atmosware.musicapp.common.constants.Messages;
 import com.atmosware.musicapp.core.security.jwt.JwtService;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationRequest;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationResponse;
@@ -33,7 +34,7 @@ public class AdminAuthenticationManager implements AdminAuthenticationService {
         admin.setCreatedAt(LocalDateTime.now());
         repository.save(admin);
         RegisterResponse response = new RegisterResponse();
-        response.setResult("Başarıyla kayıt oldunuz.");
+        response.setResult(Messages.Authentication.RegisterSuccessful);
         return response;
     }
 
@@ -44,10 +45,10 @@ public class AdminAuthenticationManager implements AdminAuthenticationService {
         HashMap<String, Object> payload = new HashMap<>();
         for (var role: admin.getAuthorities())
         {
-            payload.put("roles", role.toString());
+            payload.put(Messages.JwtPayload.Roles, role.toString());
         }
-        payload.put("email", request.getEmail());
+        payload.put(Messages.JwtPayload.Email, request.getEmail());
         var jwtToken = jwtService.generateToken(payload, admin);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder().token(jwtToken).result(Messages.Authentication.AuthSuccessful).build();
     }
 }

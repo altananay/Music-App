@@ -43,7 +43,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.atmosware.musicapp" additivity="false" level="debug">
+    <logger name="com.atmosware.musicapp" additivity="false" level="trace">
         <appender-ref ref="APPDETAILED"/>
         <appender-ref ref="APPERROR"/>
         <appender-ref ref="Console"/>

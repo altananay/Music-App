@@ -1,5 +1,6 @@
 package com.atmosware.musicapp.core.security.jwt;
 
+import com.atmosware.musicapp.common.constants.Messages;
 import com.atmosware.musicapp.entities.Admin;
 import com.atmosware.musicapp.repository.AdminRepository;
 import jakarta.servlet.FilterChain;
@@ -34,11 +35,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain)
       throws ServletException, IOException {
-    String authHeader = request.getHeader("Authorization");
+    String authHeader = request.getHeader(Messages.JwtRequest.RequestHeader);
     final String jwt;
     final String username;
     final String email;
-    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+    if (authHeader == null || !authHeader.startsWith(Messages.JwtRequest.TokenPrefix)) {
       filterChain.doFilter(request, response);
       return;
     }
@@ -52,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       if (jwtService.isTokenValid(jwt, userDetails)) {
         var authorities = new HashSet<GrantedAuthority>(userDetails.getAuthorities().size());
         for (var role : userDetails.getAuthorities())
-          authorities.add(new SimpleGrantedAuthority("ROLE_" + role.toString()));
+          authorities.add(new SimpleGrantedAuthority(Messages.JwtRequest.RolePrefix + role.toString()));
         UsernamePasswordAuthenticationToken authToken =
             new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

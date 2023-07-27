@@ -60,4 +60,23 @@ public class Messages {
     {
         public static final String NotExists = "Kullanıcının takipçileri bulunamadı";
     }
+
+    public static class JwtPayload
+    {
+        public static final String Roles = "roles";
+        public static final String Email = "email";
+    }
+
+    public static class Authentication
+    {
+        public static final String RegisterSuccessful = "Başarıyla kayıt oldunuz.";
+        public static final String AuthSuccessful = "Giriş başarılı";
+    }
+
+    public static class JwtRequest
+    {
+        public static final String RequestHeader = "Authorization";
+        public static final String TokenPrefix = "Bearer ";
+        public static final String RolePrefix = "ROLE_";
+    }
 }
