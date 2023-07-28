@@ -26,11 +26,19 @@ public class ArtistSongsController {
         return service.getAll();
     }
 
+    @GetMapping("/getAllByArtistId/{id}")
+    public List<GetAllArtistSongsResponse> getAll(@PathVariable UUID id)
+    {
+        return service.getByArtistId(id);
+    }
+
     @GetMapping("/{id}")
     public GetArtistSongResponse getById(@PathVariable UUID id)
     {
         return service.getById(id);
     }
+
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

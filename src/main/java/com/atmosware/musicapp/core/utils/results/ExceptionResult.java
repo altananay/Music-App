@@ -14,7 +14,7 @@ public class ExceptionResult<T> {
 
     public ExceptionResult(String type, T message)
     {
-        timestamp = LocalDateTime.now();
+        this.timestamp = LocalDateTime.now();
         this.type = type;
         this.message = message;
     }

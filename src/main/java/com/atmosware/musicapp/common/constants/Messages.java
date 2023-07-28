@@ -61,6 +61,11 @@ public class Messages {
         public static final String NotExists = "Kullanıcının takipçileri bulunamadı";
     }
 
+    public static class AlbumSong
+    {
+        public static final String NotExists = "Albume ait şarkılar bulunamadı";
+    }
+
     public static class JwtPayload
     {
         public static final String Roles = "roles";

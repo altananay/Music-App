@@ -1,8 +1,8 @@
 package com.atmosware.musicapp.core.security.jwt;
 
 import com.atmosware.musicapp.common.constants.Messages;
-import com.atmosware.musicapp.entities.Admin;
-import com.atmosware.musicapp.repository.AdminRepository;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,7 +53,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       if (jwtService.isTokenValid(jwt, userDetails)) {
         var authorities = new HashSet<GrantedAuthority>(userDetails.getAuthorities().size());
         for (var role : userDetails.getAuthorities())
-          authorities.add(new SimpleGrantedAuthority(Messages.JwtRequest.RolePrefix + role.toString()));
+          authorities.add(
+              new SimpleGrantedAuthority(Messages.JwtRequest.RolePrefix + role.toString()));
         UsernamePasswordAuthenticationToken authToken =
             new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

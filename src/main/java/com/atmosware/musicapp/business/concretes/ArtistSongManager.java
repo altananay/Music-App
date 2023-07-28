@@ -32,6 +32,13 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    public List<GetAllArtistSongsResponse> getByArtistId(UUID id) {
+        List<ArtistSong> artistSongs = repository.getByArtistId(id);
+        List<GetAllArtistSongsResponse> responses = artistSongs.stream().map(artistSong -> mapper.forResponse().map(artistSong, GetAllArtistSongsResponse.class)).toList();
+        return responses;
+    }
+
+    @Override
     public GetArtistSongResponse getById(UUID id) {
         rules.checkIfArtistSongExists(id);
         ArtistSong artistSong = repository.findById(id).orElseThrow();

@@ -12,10 +12,11 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllArtistSongsResponse {
+public class GetAllAlbumsSongsResponse {
     private UUID id;
-    private UUID artistId;
-    private String artistName;
+    private UUID albumId;
+    private String albumName;
+    private String albumYear;
     private UUID songId;
     private String songName;
     private LocalDateTime createdAt;

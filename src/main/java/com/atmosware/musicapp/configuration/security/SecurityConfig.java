@@ -36,6 +36,7 @@ public class SecurityConfig {
             "/songsStyles/**",
             "/songsStyles",
             "/styles/**",
+            "/albumsSongs/**",
             "/usersFavoriteSongs",
             "/admin/auth/**",
             "/admins/**",
@@ -63,12 +64,13 @@ public class SecurityConfig {
             "/songs",
             "/artistSongs",
             "/artists",
+            "/artistSongs/getAllByArtistId/**",
             "/artistAlbums",
             "/albums",
             "/users/**",
             "/usersFavoriteSongs/**")
         .permitAll()
-        .requestMatchers("/songs/**", "/albums/**", "/artists/**")
+        .requestMatchers("/songs/**", "/albums/**", "/artists/**", "/artistSongs")
         .hasAnyAuthority("ROLE_ADMIN")
         .anyRequest()
         .authenticated()
