@@ -16,7 +16,7 @@ public class CreateUserFollowerResponse {
     private UUID id;
     private UUID userId;
     private String userUsername;
-    private UUID followerId;
+    private UUID followedUserId;
     private String followerUsername;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

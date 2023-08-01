@@ -16,4 +16,11 @@ public class UserFollowerBusinessRules {
   public void checkIfUserFollowerExists(UUID id) {
     if (!repository.existsById(id)) throw new BusinessException(Messages.UserFollower.NotExists);
   }
+
+  public void checkIfUserFollowEachOther(UUID firstUserId, UUID secondUserId)
+  {
+    if (!(repository.existsByUserIdAndFollowedUserId(firstUserId, secondUserId) && repository.existsByUserIdAndFollowedUserId(secondUserId, firstUserId)))
+      throw new BusinessException("Kullanıcılar birbirlerini takip etmiyor");
+
+  }
 }

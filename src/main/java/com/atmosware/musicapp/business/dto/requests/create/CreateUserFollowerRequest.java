@@ -13,5 +13,5 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CreateUserFollowerRequest {
     private UUID userId;
-    private UUID followerId;
+    private UUID followedUserId;
 }

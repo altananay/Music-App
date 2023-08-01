@@ -9,6 +9,8 @@ import com.atmosware.musicapp.business.dto.responses.get.GetUserFollowerResponse
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFollowerResponse;
 import java.util.List;
 import java.util.UUID;
+
+import com.atmosware.musicapp.repository.UserFollowerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usersFollowers")
 public class UsersFollowersController {
     private final UserFollowerService service;
+    private final UserFollowerRepository repository;
+    @GetMapping("/test")
+    public Boolean test(@RequestParam UUID firstUserId, @RequestParam UUID secondUserId)
+    {
+        return repository.existsByUserIdAndFollowedUserId(firstUserId, secondUserId);
+    }
 
     @GetMapping
     public List<GetAllUsersFollowersResponse> getAll()

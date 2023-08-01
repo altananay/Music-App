@@ -37,7 +37,7 @@ public class UserFollowerManager implements UserFollowerService {
                     mapper.forResponse().map(userFollower, GetAllUsersFollowersResponse.class))
             .toList();
     for (var response : responses) {
-      response.setFollowerUsername(service.getById(response.getFollowerId()).getUsername());
+      response.setFollowerUsername(service.getById(response.getFollowedUserId()).getUsername());
     }
     return responses;
   }
@@ -61,7 +61,7 @@ public class UserFollowerManager implements UserFollowerService {
                     mapper.forResponse().map(userFollower, GetAllUsersFollowersResponse.class))
             .toList();
     for (var response : responses) {
-      response.setFollowerUsername(service.getById(response.getFollowerId()).getUsername());
+      response.setFollowerUsername(service.getById(response.getFollowedUserId()).getUsername());
     }
     return responses;
   }
@@ -74,7 +74,7 @@ public class UserFollowerManager implements UserFollowerService {
     UserFollower createdUserFollower = repository.save(userFollower);
     CreateUserFollowerResponse response =
         mapper.forResponse().map(createdUserFollower, CreateUserFollowerResponse.class);
-    response.setFollowerUsername(service.getById(request.getFollowerId()).getUsername());
+    response.setFollowerUsername(service.getById(request.getFollowedUserId()).getUsername());
     return response;
   }
 

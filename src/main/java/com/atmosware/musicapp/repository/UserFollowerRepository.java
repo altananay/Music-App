@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface UserFollowerRepository extends JpaRepository<UserFollower, UUID> {
     List<UserFollower> getByUserId(UUID id);
+
+    Boolean existsByUserIdAndFollowedUserId(UUID id, UUID followedUserId);
 }

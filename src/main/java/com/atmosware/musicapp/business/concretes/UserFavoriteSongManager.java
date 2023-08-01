@@ -8,9 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateUserFavoriteSo
 import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFavoriteSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFavoriteSongResponse;
-import com.atmosware.musicapp.business.rules.ArtistAlbumBusinessRules;
-import com.atmosware.musicapp.business.rules.ArtistSongBusinessRules;
-import com.atmosware.musicapp.business.rules.UserFavoriteSongRules;
+import com.atmosware.musicapp.business.rules.*;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.UserFavoriteSong;
 import com.atmosware.musicapp.repository.UserFavoriteSongRepository;
@@ -28,10 +26,12 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   private final UserFavoriteSongRepository repository;
   private final UserFavoriteSongRules rules;
+  private final UserBusinessRules userBusinessRules;
   private final ModelMapperService mapper;
   private final ArtistSongService artistSongService;
   private final ArtistSongBusinessRules artistSongBusinessRules;
   private final PopularSongService popularSongService;
+  private final UserFollowerBusinessRules userFollowerBusinessRules;
 
   @Override
   public List<GetAllUsersFavoriteSongsResponse> getAll() {
@@ -59,6 +59,9 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   @Override
   public List<GetAllUsersFavoriteSongsResponse> getMutualSongsByUsersId(UUID firstUserId, UUID secondUserId) {
+    userBusinessRules.checkIfUserExists(firstUserId);
+    userBusinessRules.checkIfUserExists(secondUserId);
+    userFollowerBusinessRules.checkIfUserFollowEachOther(firstUserId, secondUserId);
     List<GetAllUsersFavoriteSongsResponse> firstUserFavoriteSongs = getByUserId(firstUserId);
     List<GetAllUsersFavoriteSongsResponse> secondUserFavoriteSongs = getByUserId(secondUserId);
     List<GetAllUsersFavoriteSongsResponse> filter = firstUserFavoriteSongs.stream().filter(first -> secondUserFavoriteSongs.stream().anyMatch(second -> second.getSongName().equals(first.getSongName()))).collect(Collectors.toList());
