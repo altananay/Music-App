@@ -1,9 +1,10 @@
 package com.atmosware.musicapp.repository;
 
 import com.atmosware.musicapp.entities.PopularSong;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.UUID;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PopularSongRepository extends CrudRepository<PopularSong, UUID> {
+public interface PopularSongRepository extends JpaRepository<PopularSong, UUID> {
+    PopularSong getBySongId(UUID id);
+    Boolean existsBySongId(UUID id);
 }

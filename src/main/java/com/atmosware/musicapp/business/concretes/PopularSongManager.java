@@ -1,6 +1,8 @@
 package com.atmosware.musicapp.business.concretes;
 
+import com.atmosware.musicapp.business.abstracts.ArtistService;
 import com.atmosware.musicapp.business.abstracts.PopularSongService;
+import com.atmosware.musicapp.business.abstracts.SongService;
 import com.atmosware.musicapp.business.dto.requests.create.CreatePopularSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdatePopularSongRequest;
 import com.atmosware.musicapp.business.dto.responses.create.CreatePopularSongResponse;
@@ -9,14 +11,15 @@ import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdatePopularSongResponse;
 import com.atmosware.musicapp.business.rules.PopularSongBusinessRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
+import com.atmosware.musicapp.entities.Artist;
 import com.atmosware.musicapp.entities.PopularSong;
+import com.atmosware.musicapp.entities.Song;
 import com.atmosware.musicapp.repository.PopularSongRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
@@ -25,13 +28,29 @@ public class PopularSongManager implements PopularSongService {
     private final PopularSongRepository repository;
     private final ModelMapperService mapperService;
     private final PopularSongBusinessRules rules;
+    private final SongService songService;
+    private final ArtistService artistService;
 
     @Override
     public CreatePopularSongResponse add(CreatePopularSongRequest request) {
+        Song song = mapperService.forRequest().map(songService.getById(request.getSongId()), Song.class);
+        Artist artist = mapperService.forRequest().map(artistService.getById(request.getArtistId()), Artist.class);
         PopularSong popularSong = mapperService.forRequest().map(request, PopularSong.class);
         popularSong.setId(UUID.randomUUID());
         popularSong.setCreatedAt(LocalDateTime.now());
-        repository.save(popularSong);
+        popularSong.setSongName(song.getName());
+        popularSong.setArtistName(artist.getName());
+        if (repository.existsBySongId(popularSong.getSongId()))
+        {
+            var oldSong = repository.getBySongId(popularSong.getSongId());
+            popularSong.setFavoriteCount(oldSong.getFavoriteCount()+1);
+            UpdatePopularSongRequest updatePopularSongRequest = mapperService.forRequest().map(popularSong, UpdatePopularSongRequest.class);
+            update(oldSong.getId(), updatePopularSongRequest);
+        }
+        else {
+            popularSong.setFavoriteCount(1);
+            repository.save(popularSong);
+        }
         CreatePopularSongResponse response = mapperService.forResponse().map(popularSong, CreatePopularSongResponse.class);
         return response;
     }
@@ -47,10 +66,15 @@ public class PopularSongManager implements PopularSongService {
     @Override
     public UpdatePopularSongResponse update(UUID id, UpdatePopularSongRequest request) {
         rules.checkIfPopularSongExists(id);
+        Song song = mapperService.forRequest().map(songService.getById(request.getSongId()), Song.class);
+        Artist artist = mapperService.forRequest().map(artistService.getById(request.getArtistId()), Artist.class);
         PopularSong oldPopularSong = mapperService.forRequest().map(getById(id), PopularSong.class);
         PopularSong popularSong = mapperService.forRequest().map(request, PopularSong.class);
+        popularSong.setFavoriteCount(oldPopularSong.getFavoriteCount()+1);
         popularSong.setId(id);
         popularSong.setCreatedAt(oldPopularSong.getCreatedAt());
+        popularSong.setSongName(song.getName());
+        popularSong.setArtistName(artist.getName());
         popularSong.setUpdatedAt(LocalDateTime.now());
         repository.save(popularSong);
         UpdatePopularSongResponse response = mapperService.forResponse().map(popularSong, UpdatePopularSongResponse.class);
@@ -65,7 +89,7 @@ public class PopularSongManager implements PopularSongService {
 
     @Override
     public List<GetAllPopularSongsResponse> getAll() {
-        List<PopularSong> popularSongs = (List<PopularSong>) repository.findAll();
+        List<PopularSong> popularSongs = repository.findAll();
         List<GetAllPopularSongsResponse> responses = popularSongs.stream().map(popularSong -> mapperService.forResponse().map(popularSong, GetAllPopularSongsResponse.class)).toList();
         return responses;
     }

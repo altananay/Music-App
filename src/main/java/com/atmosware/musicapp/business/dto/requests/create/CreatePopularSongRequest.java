@@ -1,5 +1,6 @@
 package com.atmosware.musicapp.business.dto.requests.create;
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatePopularSongRequest {
-    private String name;
-    private String favoriteCount;
+    private UUID songId;
+    private UUID artistId;
 }

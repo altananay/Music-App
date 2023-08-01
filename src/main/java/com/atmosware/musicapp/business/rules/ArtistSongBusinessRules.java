@@ -16,4 +16,9 @@ public class ArtistSongBusinessRules {
   public void checkIfArtistSongExists(UUID id) {
     if (!repository.existsById(id)) throw new BusinessException(Messages.ArtistSong.NotExists);
   }
+
+  public void checkIfArtistSongExistsBySongId(UUID id)
+  {
+    if (!repository.existsBySongId(id)) throw new BusinessException("Muzigin sanatçı bilgisi yok");
+  }
 }

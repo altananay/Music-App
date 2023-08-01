@@ -1,12 +1,15 @@
 package com.atmosware.musicapp.business.concretes;
 
-import com.atmosware.musicapp.business.abstracts.UserFavoriteSongService;
+import com.atmosware.musicapp.business.abstracts.*;
+import com.atmosware.musicapp.business.dto.requests.create.CreatePopularSongRequest;
 import com.atmosware.musicapp.business.dto.requests.create.CreateUserFavoriteSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdateUserFavoriteSongRequest;
 import com.atmosware.musicapp.business.dto.responses.create.CreateUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFavoriteSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFavoriteSongResponse;
+import com.atmosware.musicapp.business.rules.ArtistAlbumBusinessRules;
+import com.atmosware.musicapp.business.rules.ArtistSongBusinessRules;
 import com.atmosware.musicapp.business.rules.UserFavoriteSongRules;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.UserFavoriteSong;
@@ -14,16 +17,21 @@ import com.atmosware.musicapp.repository.UserFavoriteSongRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
+import java.util.stream.Collectors;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   private final UserFavoriteSongRepository repository;
   private final UserFavoriteSongRules rules;
   private final ModelMapperService mapper;
+  private final ArtistSongService artistSongService;
+  private final ArtistSongBusinessRules artistSongBusinessRules;
+  private final PopularSongService popularSongService;
 
   @Override
   public List<GetAllUsersFavoriteSongsResponse> getAll() {
@@ -50,6 +58,14 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  public List<GetAllUsersFavoriteSongsResponse> getMutualSongsByUsersId(UUID firstUserId, UUID secondUserId) {
+    List<GetAllUsersFavoriteSongsResponse> firstUserFavoriteSongs = getByUserId(firstUserId);
+    List<GetAllUsersFavoriteSongsResponse> secondUserFavoriteSongs = getByUserId(secondUserId);
+    List<GetAllUsersFavoriteSongsResponse> filter = firstUserFavoriteSongs.stream().filter(first -> secondUserFavoriteSongs.stream().anyMatch(second -> second.getSongName().equals(first.getSongName()))).collect(Collectors.toList());
+    return filter;
+  }
+
+  @Override
   public GetUserFavoriteSongResponse getById(UUID id) {
     rules.checkIfUserFavoriteSongExists(id);
     UserFavoriteSong userFavoriteSong = repository.findById(id).orElseThrow();
@@ -60,10 +76,24 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
 
   @Override
   public CreateUserFavoriteSongResponse add(CreateUserFavoriteSongRequest request) {
+    artistSongBusinessRules.checkIfArtistSongExistsBySongId(request.getSongId());
     UserFavoriteSong userFavoriteSong = mapper.forRequest().map(request, UserFavoriteSong.class);
     userFavoriteSong.setId(UUID.randomUUID());
     userFavoriteSong.setCreatedAt(LocalDateTime.now());
+
+    // Popular song operations started.
+
+    CreatePopularSongRequest createPopularSongRequest = new CreatePopularSongRequest();
+    createPopularSongRequest.setSongId(request.getSongId());
+
+
+
+    createPopularSongRequest.setArtistId(
+        artistSongService.getBySongId(request.getSongId()).getArtistId());
+
+    popularSongService.add(createPopularSongRequest);
     UserFavoriteSong createdUserFavoriteSong = repository.save(userFavoriteSong);
+    // Popular song operations finished.
     CreateUserFavoriteSongResponse response =
         mapper.forResponse().map(createdUserFavoriteSong, CreateUserFavoriteSongResponse.class);
     return response;

@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @RedisHash("FavoriteSongs")
 @Getter
@@ -15,6 +17,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PopularSong extends BaseEntity implements Serializable {
-    private String name;
-    private String favoriteCount;
+    @Indexed
+    private UUID songId;
+    private String songName;
+    @Indexed
+    private UUID artistId;
+    private String artistName;
+    private Integer favoriteCount;
 }

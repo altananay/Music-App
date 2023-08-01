@@ -2,12 +2,15 @@ package com.atmosware.musicapp.core.security.jwt;
 
 import com.atmosware.musicapp.common.constants.Messages;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashSet;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,9 +21,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.io.IOException;
-import java.util.HashSet;
 
 @Component
 @RequiredArgsConstructor
@@ -44,9 +44,34 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
     jwt = authHeader.substring(7);
-    username = jwtService.extractUsername(jwt);
-    email = jwtService.extractEmail(jwt);
+    try
+    {
+      username = jwtService.extractUsername(jwt);
+      email = jwtService.extractEmail(jwt);
+      if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
 
+        if (jwtService.isTokenValid(jwt, userDetails)) {
+          var authorities = new HashSet<GrantedAuthority>(userDetails.getAuthorities().size());
+          for (var role : userDetails.getAuthorities())
+            authorities.add(
+                    new SimpleGrantedAuthority(Messages.JwtRequest.RolePrefix + role.toString()));
+          UsernamePasswordAuthenticationToken authToken =
+                  new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+          authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+          SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+      }
+      filterChain.doFilter(request, response);
+    }
+    catch (ExpiredJwtException e)
+    {
+      response.setStatus(HttpStatus.UNAUTHORIZED.value());
+      response.getWriter().write(e.getMessage());
+      response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+    }
+
+    /*email = jwtService.extractEmail(jwt);
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
 
@@ -61,6 +86,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
-    filterChain.doFilter(request, response);
+    filterChain.doFilter(request, response);*/
   }
 }

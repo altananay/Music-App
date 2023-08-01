@@ -7,21 +7,17 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateUserFavoriteSo
 import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFavoriteSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFavoriteSongResponse;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/usersFavoriteSongs")
-@Slf4j
 public class UsersFavoriteSongsController {
   private UserFavoriteSongService service;
-
   @GetMapping("/getAll")
   public List<GetAllUsersFavoriteSongsResponse> getAll() {
     return service.getAll();
@@ -30,6 +26,11 @@ public class UsersFavoriteSongsController {
   @GetMapping("/getByUserId/{userId}")
   public List<GetAllUsersFavoriteSongsResponse> getByUserId(@PathVariable UUID userId) {
     return service.getByUserId(userId);
+  }
+
+  @GetMapping("/getMutualSongsByUsers")
+  public List<GetAllUsersFavoriteSongsResponse> getAllByUserId(@RequestParam UUID firstUserId, @RequestParam UUID secondUserId) {
+    return service.getMutualSongsByUsersId(firstUserId, secondUserId);
   }
 
   @GetMapping("/getById/{id}")

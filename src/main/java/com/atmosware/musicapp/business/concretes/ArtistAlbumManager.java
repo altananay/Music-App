@@ -40,6 +40,13 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     }
 
     @Override
+    public GetArtistAlbumResponse getFirstByArtistId(UUID id) {
+        ArtistAlbum album = repository.findFirstByArtistId(id);
+        GetArtistAlbumResponse response = mapper.forResponse().map(album, GetArtistAlbumResponse.class);
+        return response;
+    }
+
+    @Override
     public CreateArtistAlbumResponse add(CreateArtistAlbumRequest request) {
         ArtistAlbum album = mapper.forRequest().map(request, ArtistAlbum.class);
         album.setId(UUID.randomUUID());

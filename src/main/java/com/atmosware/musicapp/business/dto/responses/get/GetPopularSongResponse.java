@@ -14,7 +14,10 @@ import java.util.UUID;
 @NoArgsConstructor
 public class GetPopularSongResponse {
     private UUID id;
-    private String name;
+    private UUID songId;
+    private String songName;
+    private UUID artistId;
+    private String artistName;
     private String favoriteCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

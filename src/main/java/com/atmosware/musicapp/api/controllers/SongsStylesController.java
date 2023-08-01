@@ -10,8 +10,6 @@ import com.atmosware.musicapp.business.dto.responses.update.UpdateSongStyleRespo
 import java.util.List;
 import java.util.UUID;
 
-import com.atmosware.musicapp.entities.SongStyle;
-import com.atmosware.musicapp.repository.SongStyleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +20,6 @@ import org.springframework.web.bind.annotation.*;
 public class SongsStylesController {
 
   private final SongStyleService service;
-  private final SongStyleRepository repository;
-
-  @GetMapping("/test/{id}")
-  public List<Object> test(@PathVariable UUID id)
-  {
-    return repository.getByStyleIdWithDetails(id);
-  }
 
   @GetMapping
   public List<GetAllSongsStylesResponse> getAll() {

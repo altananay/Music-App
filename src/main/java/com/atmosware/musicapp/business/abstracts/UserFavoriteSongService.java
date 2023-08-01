@@ -12,9 +12,9 @@ import java.util.UUID;
 public interface UserFavoriteSongService {
     List<GetAllUsersFavoriteSongsResponse> getAll();
     List<GetAllUsersFavoriteSongsResponse> getByUserId(UUID userId);
+    List<GetAllUsersFavoriteSongsResponse> getMutualSongsByUsersId(UUID firstUserId, UUID secondUserId);
     GetUserFavoriteSongResponse getById(UUID id);
     CreateUserFavoriteSongResponse add(CreateUserFavoriteSongRequest request);
     UpdateUserFavoriteSongResponse update(UUID id, UpdateUserFavoriteSongRequest request);
-
     void delete(UUID id);
 }

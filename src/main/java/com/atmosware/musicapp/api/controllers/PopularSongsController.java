@@ -2,9 +2,7 @@ package com.atmosware.musicapp.api.controllers;
 
 
 import com.atmosware.musicapp.business.abstracts.PopularSongService;
-import com.atmosware.musicapp.business.dto.requests.create.CreatePopularSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdatePopularSongRequest;
-import com.atmosware.musicapp.business.dto.responses.create.CreatePopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllPopularSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdatePopularSongResponse;
@@ -21,13 +19,6 @@ public class PopularSongsController {
 
     private final PopularSongService service;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CreatePopularSongResponse add(@RequestBody CreatePopularSongRequest request)
-    {
-        return service.add(request);
-    }
-
     @GetMapping
     public List<GetAllPopularSongsResponse> getAll()
     {
@@ -39,6 +30,7 @@ public class PopularSongsController {
     {
         return service.getById(id);
     }
+    
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

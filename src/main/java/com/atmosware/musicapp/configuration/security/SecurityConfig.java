@@ -63,6 +63,7 @@ public class SecurityConfig {
             HttpMethod.GET,
             "/songs",
             "/artistSongs",
+            "/artistSongs/**",
             "/artists",
             "/artistSongs/getAllByArtistId/**",
             "/artistAlbums",

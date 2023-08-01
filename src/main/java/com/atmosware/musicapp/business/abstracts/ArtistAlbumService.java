@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface ArtistAlbumService {
     List<GetAllArtistAlbumsResponse> getAll();
     GetArtistAlbumResponse getById(UUID id);
+    GetArtistAlbumResponse getFirstByArtistId(UUID id);
     CreateArtistAlbumResponse add(CreateArtistAlbumRequest request);
     UpdateArtistAlbumResponse update(UUID id, UpdateArtistAlbumRequest request);
     void delete(UUID id);

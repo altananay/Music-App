@@ -39,6 +39,13 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    public GetArtistSongResponse getBySongId(UUID id) {
+        ArtistSong artistSong = repository.findFirstBySongId(id);
+        GetArtistSongResponse response = mapper.forResponse().map(artistSong, GetArtistSongResponse.class);
+        return response;
+    }
+
+    @Override
     public GetArtistSongResponse getById(UUID id) {
         rules.checkIfArtistSongExists(id);
         ArtistSong artistSong = repository.findById(id).orElseThrow();

@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdatePopularSongRequest {
-    private UUID id;
-    private String name;
-    private String favoriteCount;
+    private UUID songId;
+    private UUID artistId;
+    private UUID albumId;
 }
