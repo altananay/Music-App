@@ -7,6 +7,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateArtistResponse
 import com.atmosware.musicapp.business.dto.responses.get.GetAllArtistsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetArtistResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateArtistResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,7 +37,7 @@ public class ArtistsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public CreateArtistResponse add(@RequestBody CreateArtistRequest request)
+    public CreateArtistResponse add(@RequestBody @Valid CreateArtistRequest request)
     {
         return service.add(request);
     }

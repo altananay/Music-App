@@ -10,6 +10,8 @@ import com.atmosware.musicapp.business.dto.responses.update.UpdateAdminResponse;
 import com.atmosware.musicapp.repository.AdminRepository;
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +44,7 @@ public class AdminsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateAdminResponse add(@RequestBody CreateAdminRequest request)
+    public CreateAdminResponse add(@RequestBody @Valid CreateAdminRequest request)
     {
         return service.add(request);
     }

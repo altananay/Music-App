@@ -7,6 +7,7 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateUserResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class UsersController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateUserResponse add(@RequestBody CreateUserRequest request)
+    public CreateUserResponse add(@RequestBody @Valid CreateUserRequest request)
     {
         return service.add(request);
     }

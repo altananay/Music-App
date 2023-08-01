@@ -84,19 +84,15 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
     userFavoriteSong.setId(UUID.randomUUID());
     userFavoriteSong.setCreatedAt(LocalDateTime.now());
 
-    // Popular song operations started.
-
     CreatePopularSongRequest createPopularSongRequest = new CreatePopularSongRequest();
     createPopularSongRequest.setSongId(request.getSongId());
-
-
 
     createPopularSongRequest.setArtistId(
         artistSongService.getBySongId(request.getSongId()).getArtistId());
 
     popularSongService.add(createPopularSongRequest);
     UserFavoriteSong createdUserFavoriteSong = repository.save(userFavoriteSong);
-    // Popular song operations finished.
+
     CreateUserFavoriteSongResponse response =
         mapper.forResponse().map(createdUserFavoriteSong, CreateUserFavoriteSongResponse.class);
     return response;

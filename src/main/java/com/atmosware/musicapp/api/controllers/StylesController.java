@@ -9,6 +9,8 @@ import com.atmosware.musicapp.business.dto.responses.get.GetStyleResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateStyleResponse;
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,7 @@ public class StylesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateStyleResponse add(@RequestBody CreateStyleRequest request)
+    public CreateStyleResponse add(@RequestBody @Valid CreateStyleRequest request)
     {
         return service.add(request);
     }

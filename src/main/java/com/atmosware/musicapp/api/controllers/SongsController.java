@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateSongResponse;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -38,7 +39,7 @@ public class SongsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public CreateSongResponse add(@RequestBody CreateSongRequest request)
+    public CreateSongResponse add(@RequestBody @Valid CreateSongRequest request)
     {
         return service.add(request);
     }

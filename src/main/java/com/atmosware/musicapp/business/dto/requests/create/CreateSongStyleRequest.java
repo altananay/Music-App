@@ -1,6 +1,8 @@
 package com.atmosware.musicapp.business.dto.requests.create;
 
 import java.util.UUID;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
