@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOGS" value="./logs" />
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
@@ -10,40 +10,53 @@
         </encoder>
     </appender>
 
-    <appender name="APPDETAILED" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>app/detailed.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C [%t] %m%n</Pattern>
+    <appender name="APPDETAILED"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/all-logs.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C {1.} [%t] %m%n</Pattern>
         </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>app/archive/info/detailed.%d{dd-MM-yyyy}.%i.log
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>100MB</maxFileSize>
+                <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 
-    <appender name="APPERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>app/error.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C [%t] %m%n</Pattern>
+    <appender name="APPERROR"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/logger-errors.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C {1.} [%t] %m%n</Pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>app/archive/error/error.%d{dd-MM-yyyy}.%i.log
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/error/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>50MB</maxFileSize>
+                <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 
-    <logger name="com.atmosware.musicapp" additivity="false" level="trace">
+    <root level="info">
+        <appender-ref ref="APPDETAILED"/>
+        <appender-ref ref="Console"/>
+    </root>
+
+
+    <logger name="com.atmosware.musicapp" additivity="false" level="debug">
         <appender-ref ref="APPDETAILED"/>
         <appender-ref ref="APPERROR"/>
         <appender-ref ref="Console"/>

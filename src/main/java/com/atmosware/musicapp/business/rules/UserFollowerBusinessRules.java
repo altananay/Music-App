@@ -20,7 +20,6 @@ public class UserFollowerBusinessRules {
   public void checkIfUserFollowEachOther(UUID firstUserId, UUID secondUserId)
   {
     if (!(repository.existsByUserIdAndFollowedUserId(firstUserId, secondUserId) && repository.existsByUserIdAndFollowedUserId(secondUserId, firstUserId)))
-      throw new BusinessException("Kullanıcılar birbirlerini takip etmiyor");
-
+      throw new BusinessException(Messages.UserFollower.UsersNotFollowingEachOther);
   }
 }

@@ -67,7 +67,7 @@ public class SecurityConfig {
             "/artists",
             "/artistSongs/getAllByArtistId/**",
             "/artistAlbums",
-            "/albums",
+            "/albums/**",
             "/users/**",
             "/usersFavoriteSongs/**")
         .permitAll()

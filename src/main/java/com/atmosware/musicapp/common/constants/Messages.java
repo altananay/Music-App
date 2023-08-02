@@ -24,6 +24,7 @@ public class Messages {
     public static class ArtistSong
     {
         public static final String NotExists = "Sanatçının şarkıları bulunamadı";
+        public static final String NotExistsBySongId = "Muzigin sanatçı bilgisi yok";
     }
 
     public static class PopularSong
@@ -59,6 +60,7 @@ public class Messages {
     public static class UserFollower
     {
         public static final String NotExists = "Kullanıcının takipçileri bulunamadı";
+        public static final String UsersNotFollowingEachOther = "Kullanıcılar birbirlerini takip etmiyor.";
     }
 
     public static class AlbumSong
