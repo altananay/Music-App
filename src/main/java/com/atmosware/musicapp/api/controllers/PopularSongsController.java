@@ -8,6 +8,8 @@ import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdatePopularSongResponse;
 import java.util.List;
 import java.util.UUID;
+
+import com.atmosware.musicapp.entities.PopularSong;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,12 @@ public class PopularSongsController {
     {
         return service.getById(id);
     }
-    
+
+    @GetMapping("/getAllByPagination")
+    public List<GetAllPopularSongsResponse> getById(@RequestParam int pageNumber, @RequestParam int pageSize)
+    {
+        return service.getAllByPagination(pageNumber, pageSize);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -44,5 +51,4 @@ public class PopularSongsController {
     {
         return service.update(id, request);
     }
-
 }

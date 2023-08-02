@@ -6,7 +6,6 @@ import com.atmosware.musicapp.business.dto.responses.create.CreatePopularSongRes
 import com.atmosware.musicapp.business.dto.responses.get.GetAllPopularSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdatePopularSongResponse;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -16,4 +15,5 @@ public interface PopularSongService {
     UpdatePopularSongResponse update(UUID id, UpdatePopularSongRequest request);
     void delete(UUID id);
     List<GetAllPopularSongsResponse> getAll();
+    List<GetAllPopularSongsResponse> getAllByPagination(int pageNumber, int pageSize);
 }

@@ -15,9 +15,12 @@ import com.atmosware.musicapp.entities.Artist;
 import com.atmosware.musicapp.entities.PopularSong;
 import com.atmosware.musicapp.entities.Song;
 import com.atmosware.musicapp.repository.PopularSongRepository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +93,13 @@ public class PopularSongManager implements PopularSongService {
     @Override
     public List<GetAllPopularSongsResponse> getAll() {
         List<PopularSong> popularSongs = repository.findAll();
+        List<GetAllPopularSongsResponse> responses = popularSongs.stream().map(popularSong -> mapperService.forResponse().map(popularSong, GetAllPopularSongsResponse.class)).toList();
+        return responses;
+    }
+
+    @Override
+    public List<GetAllPopularSongsResponse> getAllByPagination(int pageNumber, int pageSize) {
+        List<PopularSong> popularSongs = repository.findAll().stream().skip((long) (pageNumber-1) * pageSize).limit(pageSize).toList();
         List<GetAllPopularSongsResponse> responses = popularSongs.stream().map(popularSong -> mapperService.forResponse().map(popularSong, GetAllPopularSongsResponse.class)).toList();
         return responses;
     }
