@@ -14,6 +14,6 @@ public class AdminBusinessRules {
   private final AdminRepository repository;
 
   public void checkIfAdminExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.Admin.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.Admin.NOT_EXISTS);
   }
 }

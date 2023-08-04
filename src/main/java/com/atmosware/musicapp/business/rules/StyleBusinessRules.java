@@ -13,6 +13,6 @@ public class StyleBusinessRules {
   private final StyleRepository repository;
 
   public void checkIfStyleExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.Style.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.Style.NOT_EXISTS);
   }
 }

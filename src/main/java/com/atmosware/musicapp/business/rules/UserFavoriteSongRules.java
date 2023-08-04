@@ -14,6 +14,6 @@ public class UserFavoriteSongRules {
 
   public void checkIfUserFavoriteSongExists(UUID id) {
     if (!repository.existsById(id))
-      throw new BusinessException(Messages.UserFavoriteSong.NotExists);
+      throw new BusinessException(Messages.UserFavoriteSong.NOT_EXISTS);
   }
 }

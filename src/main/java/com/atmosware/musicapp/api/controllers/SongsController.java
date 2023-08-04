@@ -7,11 +7,11 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateSongResponse;
-import jakarta.annotation.security.RolesAllowed;
+import com.atmosware.musicapp.core.utils.interfaces.MusicDto;
+import com.atmosware.musicapp.repository.SongRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +23,18 @@ import java.util.UUID;
 @RequestMapping("/songs")
 public class SongsController {
     private final SongService service;
+    private final SongRepository repository;
 
     @GetMapping
     public List<GetAllSongsResponse> getAll()
     {
         return service.getAll();
+    }
+
+    @GetMapping("/getMusicsWithDetails")
+    public List<MusicDto> getAllWithDetails()
+    {
+        return repository.getMusicWithDetails();
     }
 
     @GetMapping("/{id}")

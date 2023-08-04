@@ -14,6 +14,6 @@ public class PopularSongBusinessRules {
   private final PopularSongRepository repository;
 
   public void checkIfPopularSongExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.PopularSong.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.PopularSong.NOT_EXISTS);
   }
 }

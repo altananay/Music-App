@@ -34,7 +34,7 @@ public class UserAuthenticationManager implements UserAuthenticationService {
         user.setCreatedAt(LocalDateTime.now());
         repository.save(user);
         RegisterResponse response = new RegisterResponse();
-        response.setResult(Messages.Authentication.RegisterSuccessful);
+        response.setResult(Messages.Authentication.REGISTER_SUCCESSFUL);
         return response;
     }
 
@@ -44,10 +44,10 @@ public class UserAuthenticationManager implements UserAuthenticationService {
         HashMap<String, Object> payload = new HashMap<>();
         for (var role: user.getAuthorities())
         {
-            payload.put(Messages.JwtPayload.Roles, role.toString());
+            payload.put(Messages.JwtPayload.ROLES, role.toString());
         }
-        payload.put(Messages.JwtPayload.Email, request.getEmail());
+        payload.put(Messages.JwtPayload.EMAIL, request.getEmail());
         var jwtToken = jwtService.generateToken(payload, user);
-        return AuthenticationResponse.builder().token(jwtToken).result(Messages.Authentication.AuthSuccessful).build();
+        return AuthenticationResponse.builder().token(jwtToken).result(Messages.Authentication.AUTH_SUCCESSFUL).build();
     }
 }

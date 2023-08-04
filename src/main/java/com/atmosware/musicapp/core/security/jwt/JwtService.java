@@ -1,6 +1,5 @@
 package com.atmosware.musicapp.core.security.jwt;
 
-import com.atmosware.musicapp.repository.AdminRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,6 +10,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwtService {
 
-  private static final String SECRET_KEY =
-      "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+
+  @Value("${application.security.jwt.secret-key}")
+  private String secretKey;
+  @Value("${application.security.jwt.expiration}")
+  private long jwtExpiration;
 
   public String extractUsername(String jwt) {
     return extractClaim(jwt, Claims::getSubject);
@@ -51,7 +54,7 @@ public class JwtService {
         .setClaims(extractClaims)
         .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+        .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
         .signWith(getSignInKey(), SignatureAlgorithm.HS256)
         .compact();
   }
@@ -75,7 +78,7 @@ public class JwtService {
   }
 
   private Key getSignInKey() {
-    byte[] key = Decoders.BASE64.decode(SECRET_KEY);
+    byte[] key = Decoders.BASE64.decode(secretKey);
     return Keys.hmacShaKeyFor(key);
   }
 }

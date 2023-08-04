@@ -14,6 +14,6 @@ public class AlbumBusinessRules {
   private final AlbumRepository repository;
 
   public void checkIfAlbumExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.Album.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.Album.NOT_EXISTS);
   }
 }

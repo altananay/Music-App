@@ -34,7 +34,7 @@ public class AdminAuthenticationManager implements AdminAuthenticationService {
         admin.setCreatedAt(LocalDateTime.now());
         repository.save(admin);
         RegisterResponse response = new RegisterResponse();
-        response.setResult(Messages.Authentication.RegisterSuccessful);
+        response.setResult(Messages.Authentication.REGISTER_SUCCESSFUL);
         return response;
     }
 
@@ -45,10 +45,10 @@ public class AdminAuthenticationManager implements AdminAuthenticationService {
         HashMap<String, Object> payload = new HashMap<>();
         for (var role: admin.getAuthorities())
         {
-            payload.put(Messages.JwtPayload.Roles, role.toString());
+            payload.put(Messages.JwtPayload.ROLES, role.toString());
         }
-        payload.put(Messages.JwtPayload.Email, request.getEmail());
+        payload.put(Messages.JwtPayload.EMAIL, request.getEmail());
         var jwtToken = jwtService.generateToken(payload, admin);
-        return AuthenticationResponse.builder().token(jwtToken).result(Messages.Authentication.AuthSuccessful).build();
+        return AuthenticationResponse.builder().token(jwtToken).result(Messages.Authentication.AUTH_SUCCESSFUL).build();
     }
 }

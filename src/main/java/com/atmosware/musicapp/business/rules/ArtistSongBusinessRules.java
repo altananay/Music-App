@@ -14,11 +14,11 @@ public class ArtistSongBusinessRules {
   private final ArtistSongRepository repository;
 
   public void checkIfArtistSongExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.ArtistSong.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.ArtistSong.NOT_EXISTS);
   }
 
   public void checkIfArtistSongExistsBySongId(UUID id)
   {
-    if (!repository.existsBySongId(id)) throw new BusinessException(Messages.ArtistSong.NotExistsBySongId);
+    if (!repository.existsBySongId(id)) throw new BusinessException(Messages.ArtistSong.NOT_EXISTS_BY_SONG_ID);
   }
 }

@@ -14,6 +14,6 @@ public class SongBusinessRules {
   private final SongRepository repository;
 
   public void checkIfSongExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.Song.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.Song.NOT_EXISTS);
   }
 }

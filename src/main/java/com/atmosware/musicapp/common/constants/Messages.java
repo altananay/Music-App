@@ -1,89 +1,124 @@
 package com.atmosware.musicapp.common.constants;
 
 public class Messages {
+
+    private Messages() {}
+
     public static class Admin
     {
-        public static final String NotExists = "Admin bulunamadı";
+        private Admin() {}
+
+        public static final String NOT_EXISTS = "Admin bulunamadı";
     }
 
     public static class Album
     {
-        public static final String NotExists = "Album bulunamadı";
+        private Album() {}
+
+        public static final String NOT_EXISTS = "Album bulunamadı";
     }
 
     public static class ArtistAlbum
     {
-        public static final String NotExists = "Sanatçının albumu bulunamadı";
+        private ArtistAlbum() {}
+
+        public static final String NOT_EXISTS = "Sanatçının albumu bulunamadı";
     }
 
     public static class Artist
     {
-        public static final String NotExists = "Sanatçı bulunamadı";
+        private Artist() {}
+
+        public static final String NOT_EXISTS = "Sanatçı bulunamadı";
     }
 
     public static class ArtistSong
     {
-        public static final String NotExists = "Sanatçının şarkıları bulunamadı";
-        public static final String NotExistsBySongId = "Muzigin sanatçı bilgisi yok";
+        private ArtistSong() {}
+
+        public static final String NOT_EXISTS = "Sanatçının şarkıları bulunamadı";
+        public static final String NOT_EXISTS_BY_SONG_ID = "Muzigin sanatçı bilgisi yok";
     }
 
     public static class PopularSong
     {
-        public static final String NotExists = "Popular muzik bulunamadı";
+        private PopularSong() {}
+
+        public static final String NOT_EXISTS = "Popular muzik bulunamadı";
     }
 
     public static class Song
     {
-        public static final String NotExists = "Muzik bulunamadı";
+        private Song() {}
+
+        public static final String NOT_EXISTS = "Muzik bulunamadı";
     }
 
     public static class SongStyle
     {
-        public static final String NotExists = "Muzik tarzı bulunamadı";
+        private SongStyle() {}
+
+        public static final String NOT_EXISTS = "Muzik tarzı bulunamadı";
     }
 
     public static class Style
     {
-        public static final String NotExists = "Müzik tarzı bulunamadı";
+        private Style() {}
+
+        public static final String NOT_EXISTS = "Müzik tarzı bulunamadı";
     }
 
     public static class User
     {
-        public static final String NotExists = "Kullanıcı bulunamadı";
+        private User() {}
+
+        public static final String NOT_EXISTS = "Kullanıcı bulunamadı";
     }
 
     public static class UserFavoriteSong
     {
-        public static final String NotExists = "Kullanıcının favori muzikleri bulunamadı";
+        private UserFavoriteSong() {}
+
+        public static final String NOT_EXISTS = "Kullanıcının favori muzikleri bulunamadı";
     }
 
     public static class UserFollower
     {
-        public static final String NotExists = "Kullanıcının takipçileri bulunamadı";
-        public static final String UsersNotFollowingEachOther = "Kullanıcılar birbirlerini takip etmiyor.";
+        private UserFollower() {}
+
+        public static final String NOT_EXISTS = "Kullanıcının takipçileri bulunamadı";
+        public static final String USERS_NOT_FOLLOWING_EACH_OTHER = "Kullanıcılar birbirlerini takip etmiyor.";
     }
 
     public static class AlbumSong
     {
-        public static final String NotExists = "Albume ait şarkılar bulunamadı";
+        private AlbumSong() {}
+
+        public static final String NOT_EXISTS = "Albume ait şarkılar bulunamadı";
     }
 
     public static class JwtPayload
     {
-        public static final String Roles = "roles";
-        public static final String Email = "email";
+        private JwtPayload() {}
+
+        public static final String ROLES = "roles";
+        public static final String EMAIL = "email";
     }
 
     public static class Authentication
     {
-        public static final String RegisterSuccessful = "Başarıyla kayıt oldunuz.";
-        public static final String AuthSuccessful = "Giriş başarılı";
+        private Authentication() {}
+
+        public static final String REGISTER_SUCCESSFUL = "Başarıyla kayıt oldunuz.";
+        public static final String AUTH_SUCCESSFUL = "Giriş başarılı";
     }
 
     public static class JwtRequest
     {
-        public static final String RequestHeader = "Authorization";
-        public static final String TokenPrefix = "Bearer ";
-        public static final String RolePrefix = "ROLE_";
+        private JwtRequest() {}
+
+        public static final String REQUEST_HEADER = "Authorization";
+        public static final String TOKEN_PREFIX = "Bearer ";
+        public static final String ROLE_PREFIX = "ROLE_";
     }
 }

@@ -14,6 +14,6 @@ public class ArtistBusinessRules {
   private final ArtistRepository repository;
 
   public void checkIfArtistExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.Artist.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.Artist.NOT_EXISTS);
   }
 }

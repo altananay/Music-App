@@ -13,6 +13,6 @@ public class SongStyleBusinessRules {
   private final SongStyleRepository repository;
 
   public void checkIfSongStyleExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.SongStyle.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.SongStyle.NOT_EXISTS);
   }
 }

@@ -13,6 +13,6 @@ public class UserBusinessRules {
   private final UserRepository repository;
 
   public void checkIfUserExists(UUID id) {
-    if (!repository.existsById(id)) throw new BusinessException(Messages.User.NotExists);
+    if (!repository.existsById(id)) throw new BusinessException(Messages.User.NOT_EXISTS);
   }
 }

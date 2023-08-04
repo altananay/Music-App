@@ -16,6 +16,6 @@ public class AlbumSongBusinessRules {
     public void checkIfAlbumSongExists(UUID id)
     {
         if (!repository.existsById(id))
-            throw new BusinessException(Messages.AlbumSong.NotExists);
+            throw new BusinessException(Messages.AlbumSong.NOT_EXISTS);
     }
 }

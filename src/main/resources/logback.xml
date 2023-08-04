@@ -20,7 +20,7 @@
 
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${LOGS}/archived/all-logs-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -31,7 +31,7 @@
 
     <appender name="APPERROR"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/logger-errors.log</file>
+        <file>${LOGS}/error-logs.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d %p %C {1.} [%t] %m%n</Pattern>
@@ -41,7 +41,7 @@
         </filter>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGS}/archived/error/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${LOGS}/archived/error/error-logs-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -54,7 +54,6 @@
         <appender-ref ref="APPDETAILED"/>
         <appender-ref ref="Console"/>
     </root>
-
 
     <logger name="com.atmosware.musicapp" additivity="false" level="debug">
         <appender-ref ref="APPDETAILED"/>

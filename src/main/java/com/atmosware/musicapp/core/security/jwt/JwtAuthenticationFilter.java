@@ -35,11 +35,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain)
       throws ServletException, IOException {
-    String authHeader = request.getHeader(Messages.JwtRequest.RequestHeader);
+    String authHeader = request.getHeader(Messages.JwtRequest.REQUEST_HEADER);
     final String jwt;
     final String username;
     final String email;
-    if (authHeader == null || !authHeader.startsWith(Messages.JwtRequest.TokenPrefix)) {
+    if (authHeader == null || !authHeader.startsWith(Messages.JwtRequest.TOKEN_PREFIX)) {
       filterChain.doFilter(request, response);
       return;
     }
@@ -55,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           var authorities = new HashSet<GrantedAuthority>(userDetails.getAuthorities().size());
           for (var role : userDetails.getAuthorities())
             authorities.add(
-                    new SimpleGrantedAuthority(Messages.JwtRequest.RolePrefix + role.toString()));
+                    new SimpleGrantedAuthority(Messages.JwtRequest.ROLE_PREFIX + role.toString()));
           UsernamePasswordAuthenticationToken authToken =
                   new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
           authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -70,22 +70,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       response.getWriter().write(e.getMessage());
       response.setContentType(MediaType.APPLICATION_JSON_VALUE);
     }
-
-    /*email = jwtService.extractEmail(jwt);
-    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-
-      if (jwtService.isTokenValid(jwt, userDetails)) {
-        var authorities = new HashSet<GrantedAuthority>(userDetails.getAuthorities().size());
-        for (var role : userDetails.getAuthorities())
-          authorities.add(
-              new SimpleGrantedAuthority(Messages.JwtRequest.RolePrefix + role.toString()));
-        UsernamePasswordAuthenticationToken authToken =
-            new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
-        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authToken);
-      }
-    }
-    filterChain.doFilter(request, response);*/
   }
 }
