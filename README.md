@@ -13,8 +13,10 @@ Albüm ekleme/çıkarma <br>
 Şarkı/Sanatçı/Albüm/Tür'lere göre şarkı arama <br>
 En popüler şarkılar(favori sayısına göre)(Redis)(Pagination) <br>
 
-## Kullanılan Kütüphaneler / Libraries Used
+## Kullanılan Teknolojiler
 
+| Kütüphane             | Sürümü                                                                |
+| ----------------- | ------------------------------------------------------------------ |
 | Java Version | 17LTS  |
 | Framework | Spring Boot 3.0 |
 | Static Code Analysis | Sonarlint (SonarQube) |
