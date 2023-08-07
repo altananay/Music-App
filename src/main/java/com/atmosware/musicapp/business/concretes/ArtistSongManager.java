@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllArtistSongsRespon
 import com.atmosware.musicapp.business.dto.responses.get.GetArtistSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateArtistSongResponse;
 import com.atmosware.musicapp.business.rules.ArtistSongBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.ArtistSong;
 import com.atmosware.musicapp.repository.ArtistSongRepository;
@@ -25,6 +26,7 @@ public class ArtistSongManager implements ArtistSongService {
     private final ModelMapperService mapper;
     private final ArtistSongBusinessRules rules;
     @Override
+    @Logger
     public List<GetAllArtistSongsResponse> getAll() {
         List<ArtistSong> artistSongs = repository.findAll();
         List<GetAllArtistSongsResponse> responses = artistSongs.stream().map(artistSong -> mapper.forResponse().map(artistSong, GetAllArtistSongsResponse.class)).toList();
@@ -32,6 +34,7 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    @Logger
     public List<GetAllArtistSongsResponse> getByArtistId(UUID id) {
         List<ArtistSong> artistSongs = repository.getByArtistId(id);
         List<GetAllArtistSongsResponse> responses = artistSongs.stream().map(artistSong -> mapper.forResponse().map(artistSong, GetAllArtistSongsResponse.class)).toList();
@@ -39,6 +42,7 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    @Logger
     public GetArtistSongResponse getBySongId(UUID id) {
         ArtistSong artistSong = repository.findFirstBySongId(id);
         GetArtistSongResponse response = mapper.forResponse().map(artistSong, GetArtistSongResponse.class);
@@ -46,6 +50,7 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    @Logger
     public GetArtistSongResponse getById(UUID id) {
         rules.checkIfArtistSongExists(id);
         ArtistSong artistSong = repository.findById(id).orElseThrow();
@@ -54,6 +59,7 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    @Logger
     public CreateArtistSongResponse add(CreateArtistSongRequest request) {
         ArtistSong artistSong = mapper.forRequest().map(request, ArtistSong.class);
         artistSong.setId(UUID.randomUUID());
@@ -64,6 +70,7 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    @Logger
     public UpdateArtistSongResponse update(UUID id, UpdateArtistSongRequest request) {
         rules.checkIfArtistSongExists(id);
         ArtistSong oldArtistSong = mapper.forRequest().map(getById(id), ArtistSong.class);
@@ -77,6 +84,7 @@ public class ArtistSongManager implements ArtistSongService {
     }
 
     @Override
+    @Logger
     public void delete(UUID id) {
         rules.checkIfArtistSongExists(id);
         repository.deleteById(id);

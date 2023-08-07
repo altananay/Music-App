@@ -21,20 +21,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admins")
 public class AdminsController {
     private final AdminService service;
-    private final AdminRepository repository;
 
     @GetMapping
     public List<GetAllAdminsResponse> getAll()
     {
         return service.getAll();
     }
-
-    @GetMapping("/{username}")
-    public String getUsername(String username)
-    {
-        return repository.findByUsername(username);
-    }
-
 
     @GetMapping("/{id}")
     public GetAdminResponse getById(@PathVariable UUID id)

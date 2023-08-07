@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsersFollowersController {
     private final UserFollowerService service;
     private final UserFollowerRepository repository;
-    @GetMapping("/test")
+    @GetMapping("/checkUsersFollowEachOther")
     public Boolean test(@RequestParam UUID firstUserId, @RequestParam UUID secondUserId)
     {
         return repository.existsByUserIdAndFollowedUserId(firstUserId, secondUserId);

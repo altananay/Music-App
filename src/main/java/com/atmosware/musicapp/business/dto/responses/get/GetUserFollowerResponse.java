@@ -16,7 +16,7 @@ public class GetUserFollowerResponse {
     private UUID userId;
     private String userUsername;
     private UUID followerId;
-    private String follower;
+    private String followerUsername;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

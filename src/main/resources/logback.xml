@@ -15,7 +15,7 @@
         <file>${LOGS}/all-logs.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C {1.} [%t] %m%n</Pattern>
+            <Pattern>%d %p %C [%t] %m%n</Pattern>
         </encoder>
 
         <rollingPolicy
@@ -34,7 +34,7 @@
         <file>${LOGS}/error-logs.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C {1.} [%t] %m%n</Pattern>
+            <Pattern>%d %p %C [%t] %m%n</Pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
@@ -50,14 +50,37 @@
         </rollingPolicy>
     </appender>
 
+    <appender name="aspect-logs"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/aspect-logs.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C [%t] %m%n</Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INGO</level>
+        </filter>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/aspect-logs/aspect-logs-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+
     <root level="info">
-        <appender-ref ref="APPDETAILED"/>
         <appender-ref ref="Console"/>
+        <appender-ref ref="APPDETAILED"/>
     </root>
 
-    <logger name="com.atmosware.musicapp" additivity="false" level="debug">
-        <appender-ref ref="APPDETAILED"/>
-        <appender-ref ref="APPERROR"/>
+    <logger name="com.atmosware" additivity="false" level="info">
         <appender-ref ref="Console"/>
+        <appender-ref ref="APPERROR"/>
+        <appender-ref ref="aspect-logs"/>
+        <appender-ref ref="APPDETAILED"/>
     </logger>
 </configuration>

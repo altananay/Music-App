@@ -8,11 +8,13 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllAdminsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateAdminResponse;
 import com.atmosware.musicapp.business.rules.AdminBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.Admin;
 import com.atmosware.musicapp.entities.enums.Role;
 import com.atmosware.musicapp.repository.AdminRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,6 +29,7 @@ public class AdminManager implements AdminService {
     private final AdminBusinessRules rules;
 
     @Override
+    @Logger
     public List<GetAllAdminsResponse> getAll() {
         List<Admin> admins = repository.findAll();
         List<GetAllAdminsResponse> responses = admins.stream().map(admin -> mapper.forResponse().map(admin, GetAllAdminsResponse.class)).toList();
@@ -34,6 +37,7 @@ public class AdminManager implements AdminService {
     }
 
     @Override
+    @Logger
     public GetAdminResponse getById(UUID id) {
         rules.checkIfAdminExists(id);
         Admin admin = repository.findById(id).orElseThrow();
@@ -42,6 +46,7 @@ public class AdminManager implements AdminService {
     }
 
     @Override
+    @Logger
     public CreateAdminResponse add(CreateAdminRequest request) {
         Admin admin = mapper.forRequest().map(request, Admin.class);
         admin.setId(UUID.randomUUID());
@@ -53,6 +58,7 @@ public class AdminManager implements AdminService {
     }
 
     @Override
+    @Logger
     public UpdateAdminResponse update(UUID id, UpdateAdminRequest request) {
         rules.checkIfAdminExists(id);
         Admin oldAdmin = mapper.forRequest().map(getById(id), Admin.class);
@@ -67,6 +73,7 @@ public class AdminManager implements AdminService {
     }
 
     @Override
+    @Logger
     public void delete(UUID id) {
         rules.checkIfAdminExists(id);
         repository.deleteById(id);

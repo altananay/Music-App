@@ -9,6 +9,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFollowersRes
 import com.atmosware.musicapp.business.dto.responses.get.GetUserFollowerResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFollowerResponse;
 import com.atmosware.musicapp.business.rules.UserFollowerBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.UserFollower;
 import com.atmosware.musicapp.repository.UserFollowerRepository;
@@ -28,6 +29,7 @@ public class UserFollowerManager implements UserFollowerService {
   private final ModelMapperService mapper;
 
   @Override
+  @Logger
   public List<GetAllUsersFollowersResponse> getAll() {
     List<UserFollower> userFollowers = repository.findAll();
     List<GetAllUsersFollowersResponse> responses =
@@ -43,6 +45,7 @@ public class UserFollowerManager implements UserFollowerService {
   }
 
   @Override
+  @Logger
   public GetUserFollowerResponse getById(UUID id) {
     rules.checkIfUserFollowerExists(id);
     UserFollower userFollower = repository.findById(id).orElseThrow();
@@ -52,6 +55,7 @@ public class UserFollowerManager implements UserFollowerService {
   }
 
   @Override
+  @Logger
   public List<GetAllUsersFollowersResponse> getByUserId(UUID id) {
     List<UserFollower> userFollowers = repository.getByUserId(id);
     List<GetAllUsersFollowersResponse> responses =
@@ -67,6 +71,7 @@ public class UserFollowerManager implements UserFollowerService {
   }
 
   @Override
+  @Logger
   public CreateUserFollowerResponse add(CreateUserFollowerRequest request) {
     UserFollower userFollower = mapper.forRequest().map(request, UserFollower.class);
     userFollower.setId(UUID.randomUUID());
@@ -79,6 +84,7 @@ public class UserFollowerManager implements UserFollowerService {
   }
 
   @Override
+  @Logger
   public UpdateUserFollowerResponse update(UUID id, UpdateUserFollowerRequest request) {
     rules.checkIfUserFollowerExists(id);
     UserFollower oldUserFollower = mapper.forRequest().map(getById(id), UserFollower.class);
@@ -94,6 +100,7 @@ public class UserFollowerManager implements UserFollowerService {
   }
 
   @Override
+  @Logger
   public void delete(UUID id) {
     rules.checkIfUserFollowerExists(id);
     repository.deleteById(id);

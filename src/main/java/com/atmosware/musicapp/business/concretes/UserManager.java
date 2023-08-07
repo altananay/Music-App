@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserResponse;
 import com.atmosware.musicapp.business.rules.UserBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.User;
 import com.atmosware.musicapp.entities.enums.Role;
@@ -26,6 +27,7 @@ public class UserManager implements UserService {
     private final ModelMapperService mapper;
     private final UserBusinessRules rules;
     @Override
+    @Logger
     public List<GetAllUsersResponse> getAll() {
         List<User> users = repository.findAll();
         List<GetAllUsersResponse> responses = users.stream().map(user -> mapper.forResponse().map(user, GetAllUsersResponse.class)).toList();
@@ -33,6 +35,7 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Logger
     public GetUserResponse getById(UUID id) {
         rules.checkIfUserExists(id);
         User user = repository.findById(id).orElseThrow();
@@ -41,6 +44,7 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Logger
     public CreateUserResponse add(CreateUserRequest request) {
         User user = mapper.forRequest().map(request, User.class);
         user.setId(UUID.randomUUID());
@@ -52,6 +56,7 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Logger
     public UpdateUserResponse update(UUID id, UpdateUserRequest request) {
         rules.checkIfUserExists(id);
         User oldUser = mapper.forRequest().map(getById(id), User.class);
@@ -66,6 +71,7 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Logger
     public void delete(UUID id) {
         rules.checkIfUserExists(id);
         repository.deleteById(id);

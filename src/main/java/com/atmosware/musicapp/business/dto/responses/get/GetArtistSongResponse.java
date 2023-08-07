@@ -15,7 +15,9 @@ import java.util.UUID;
 public class GetArtistSongResponse {
     private UUID id;
     private UUID artistId;
+    private String artistName;
     private UUID songId;
+    private String songName;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

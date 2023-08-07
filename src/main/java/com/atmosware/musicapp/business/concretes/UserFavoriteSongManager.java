@@ -9,6 +9,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFavoriteSong
 import com.atmosware.musicapp.business.dto.responses.get.GetUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.rules.*;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.UserFavoriteSong;
 import com.atmosware.musicapp.repository.UserFavoriteSongRepository;
@@ -34,6 +35,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   private final UserFollowerBusinessRules userFollowerBusinessRules;
 
   @Override
+  @Logger
   public List<GetAllUsersFavoriteSongsResponse> getAll() {
     List<UserFavoriteSong> favoriteSongs = repository.findAll();
     List<GetAllUsersFavoriteSongsResponse> responses =
@@ -46,6 +48,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  @Logger
   public List<GetAllUsersFavoriteSongsResponse> getByUserId(UUID userId) {
     List<UserFavoriteSong> favoriteSongs = repository.getByUserId(userId);
     List<GetAllUsersFavoriteSongsResponse> responses =
@@ -58,6 +61,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  @Logger
   public List<GetAllUsersFavoriteSongsResponse> getMutualSongsByUsersId(UUID firstUserId, UUID secondUserId) {
     userBusinessRules.checkIfUserExists(firstUserId);
     userBusinessRules.checkIfUserExists(secondUserId);
@@ -69,6 +73,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  @Logger
   public GetUserFavoriteSongResponse getById(UUID id) {
     rules.checkIfUserFavoriteSongExists(id);
     UserFavoriteSong userFavoriteSong = repository.findById(id).orElseThrow();
@@ -78,6 +83,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  @Logger
   public CreateUserFavoriteSongResponse add(CreateUserFavoriteSongRequest request) {
     artistSongBusinessRules.checkIfArtistSongExistsBySongId(request.getSongId());
     UserFavoriteSong userFavoriteSong = mapper.forRequest().map(request, UserFavoriteSong.class);
@@ -99,6 +105,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  @Logger
   public UpdateUserFavoriteSongResponse update(UUID id, UpdateUserFavoriteSongRequest request) {
     rules.checkIfUserFavoriteSongExists(id);
     UserFavoriteSong oldUserFavoriteSong =
@@ -114,6 +121,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   }
 
   @Override
+  @Logger
   public void delete(UUID id) {
     rules.checkIfUserFavoriteSongExists(id);
     repository.deleteById(id);

@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAlbumSongResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllAlbumsSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateAlbumSongResponse;
 import com.atmosware.musicapp.business.rules.AlbumSongBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.AlbumSong;
 import com.atmosware.musicapp.repository.AlbumSongRepository;
@@ -26,6 +27,7 @@ public class AlbumSongManager implements AlbumSongService {
     private final ModelMapperService mapper;
 
     @Override
+    @Logger
     public List<GetAllAlbumsSongsResponse> getAll() {
         List<AlbumSong> albumSongs = repository.findAll();
         List<GetAllAlbumsSongsResponse> responses =
@@ -36,6 +38,7 @@ public class AlbumSongManager implements AlbumSongService {
     }
 
     @Override
+    @Logger
     public List<GetAllAlbumsSongsResponse> getAllByAlbumId(UUID id) {
         List<AlbumSong> albumSongs = repository.getByAlbumId(id);
         List<GetAllAlbumsSongsResponse> responses =
@@ -46,6 +49,7 @@ public class AlbumSongManager implements AlbumSongService {
     }
 
     @Override
+    @Logger
     public GetAlbumSongResponse getById(UUID id) {
         rules.checkIfAlbumSongExists(id);
         AlbumSong albumSong = repository.findById(id).orElseThrow();
@@ -54,6 +58,7 @@ public class AlbumSongManager implements AlbumSongService {
     }
 
     @Override
+    @Logger
     public CreateAlbumSongResponse add(CreateAlbumSongRequest request) {
         AlbumSong albumSong = mapper.forRequest().map(request, AlbumSong.class);
         albumSong.setId(UUID.randomUUID());
@@ -65,6 +70,7 @@ public class AlbumSongManager implements AlbumSongService {
     }
 
     @Override
+    @Logger
     public UpdateAlbumSongResponse update(UUID id, UpdateAlbumSongRequest request) {
         rules.checkIfAlbumSongExists(id);
         AlbumSong oldAlbumSong = mapper.forRequest().map(getById(id), AlbumSong.class);
@@ -78,6 +84,7 @@ public class AlbumSongManager implements AlbumSongService {
     }
 
     @Override
+    @Logger
     public void delete(UUID id) {
         rules.checkIfAlbumSongExists(id);
         repository.deleteById(id);

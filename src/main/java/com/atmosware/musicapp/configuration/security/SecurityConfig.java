@@ -66,8 +66,10 @@ public class SecurityConfig {
             "/artistSongs",
             "/artistSongs/**",
             "/artists",
+            "/artists/**",
             "/artistSongs/getAllByArtistId/**",
             "/artistAlbums",
+            "/artistAlbums/**",
             "/albums/**",
             "/users/**",
             "/usersFavoriteSongs/**")

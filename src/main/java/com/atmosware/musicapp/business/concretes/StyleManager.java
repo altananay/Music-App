@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllStylesResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetStyleResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateStyleResponse;
 import com.atmosware.musicapp.business.rules.StyleBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.Style;
 import com.atmosware.musicapp.repository.StyleRepository;
@@ -26,6 +27,7 @@ public class StyleManager implements StyleService {
   private final ModelMapperService mapper;
 
   @Override
+  @Logger
   public List<GetAllStylesResponse> getAll() {
     List<Style> styles = repository.findAll();
     List<GetAllStylesResponse> responses =
@@ -36,6 +38,7 @@ public class StyleManager implements StyleService {
   }
 
   @Override
+  @Logger
   public GetStyleResponse getById(UUID id) {
     rules.checkIfStyleExists(id);
     Style style = repository.findById(id).orElseThrow();
@@ -44,6 +47,7 @@ public class StyleManager implements StyleService {
   }
 
   @Override
+  @Logger
   public CreateStyleResponse add(CreateStyleRequest request) {
     Style style = mapper.forRequest().map(request, Style.class);
     style.setId(UUID.randomUUID());
@@ -55,6 +59,7 @@ public class StyleManager implements StyleService {
   }
 
   @Override
+  @Logger
   public UpdateStyleResponse update(UUID id, UpdateStyleRequest request) {
     rules.checkIfStyleExists(id);
     Style oldStyle = mapper.forRequest().map(getById(id), Style.class);
@@ -68,6 +73,7 @@ public class StyleManager implements StyleService {
   }
 
   @Override
+  @Logger
   public void delete(UUID id) {
     rules.checkIfStyleExists(id);
     repository.deleteById(id);

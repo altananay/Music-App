@@ -1,0 +1,10 @@
+2023-08-07 16:20:57,927 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting MusicAppApplication using Java 20.0.1 with PID 22188 (C:\Users\altan\IdeaProjects\music-app\target\classes started by Altan in C:\Users\altan\IdeaProjects\music-app)
+2023-08-07 16:20:57,930 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-08-07 16:21:07,398 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started MusicAppApplication in 9.968 seconds (process running for 11.124)
+2023-08-07 16:21:12,748 INFO com.atmosware.musicapp.core.aspects.LogAspect [http-nio-8080-exec-1] getAll started with parameters: {}
+2023-08-07 16:21:12,909 INFO com.atmosware.musicapp.business.concretes.AlbumManager [http-nio-8080-exec-1] albumler listelendi
+2023-08-07 16:21:12,909 INFO com.atmosware.musicapp.core.aspects.LogAspect [http-nio-8080-exec-1] getAll finished with return value: [com.atmosware.musicapp.business.dto.responses.get.GetAllAlbumsResponse@2b528dbf]
+2023-08-07 16:21:53,996 INFO com.atmosware.musicapp.core.aspects.LogAspect [http-nio-8080-exec-3] authenticate started with parameters: {request=com.atmosware.musicapp.core.utils.dto.AuthenticationRequest@11bf69f2}
+2023-08-07 16:21:54,059 INFO com.atmosware.musicapp.core.aspects.LogAspect [http-nio-8080-exec-3] authenticate finished with return value: com.atmosware.musicapp.core.utils.dto.AuthenticationResponse@4f48e275
+2023-08-07 16:22:09,342 INFO com.atmosware.musicapp.core.aspects.LogAspect [http-nio-8080-exec-4] add started with parameters: {request=com.atmosware.musicapp.business.dto.requests.create.CreateSongRequest@54a425b0}
+2023-08-07 16:22:09,397 INFO com.atmosware.musicapp.core.aspects.LogAspect [http-nio-8080-exec-4] add finished with return value: com.atmosware.musicapp.business.dto.responses.create.CreateSongResponse@6db0e04b

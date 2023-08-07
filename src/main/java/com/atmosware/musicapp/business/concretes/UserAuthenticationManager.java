@@ -2,6 +2,7 @@ package com.atmosware.musicapp.business.concretes;
 
 import com.atmosware.musicapp.business.abstracts.UserAuthenticationService;
 import com.atmosware.musicapp.common.constants.Messages;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.security.jwt.JwtService;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationRequest;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationResponse;
@@ -27,6 +28,7 @@ public class UserAuthenticationManager implements UserAuthenticationService {
     private final JwtService jwtService;
 
     @Override
+    @Logger
     public RegisterResponse register(RegisterRequest request) {
         var user = mapper.forRequest().map(request, User.class);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -39,6 +41,7 @@ public class UserAuthenticationManager implements UserAuthenticationService {
     }
 
     @Override
+    @Logger
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         var user = repository.findByEmail(request.getEmail());
         HashMap<String, Object> payload = new HashMap<>();

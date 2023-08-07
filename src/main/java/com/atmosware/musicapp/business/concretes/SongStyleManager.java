@@ -10,6 +10,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllSongsStylesRespon
 import com.atmosware.musicapp.business.dto.responses.get.GetSongStyleResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateSongStyleResponse;
 import com.atmosware.musicapp.business.rules.SongStyleBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.SongStyle;
 import com.atmosware.musicapp.repository.SongStyleRepository;
@@ -30,6 +31,7 @@ public class SongStyleManager implements SongStyleService {
   private final StyleService styleService;
 
   @Override
+  @Logger
   public List<GetAllSongsStylesResponse> getAll() {
     List<SongStyle> songStyles = repository.findAll();
     List<GetAllSongsStylesResponse> responses =
@@ -40,6 +42,7 @@ public class SongStyleManager implements SongStyleService {
   }
 
   @Override
+  @Logger
   public List<GetAllSongsStylesResponse> getAllByStyleId(UUID id) {
     List<SongStyle> songStyles = repository.getByStyleId(id);
     List<GetAllSongsStylesResponse> responses =
@@ -50,6 +53,7 @@ public class SongStyleManager implements SongStyleService {
   }
 
   @Override
+  @Logger
   public GetSongStyleResponse getById(UUID id) {
     rules.checkIfSongStyleExists(id);
     SongStyle songStyle = repository.findById(id).orElseThrow();
@@ -58,6 +62,7 @@ public class SongStyleManager implements SongStyleService {
   }
 
   @Override
+  @Logger
   public CreateSongStyleResponse add(CreateSongStyleRequest request) {
     SongStyle songStyle = mapper.forRequest().map(request, SongStyle.class);
     songStyle.setId(UUID.randomUUID());
@@ -69,6 +74,7 @@ public class SongStyleManager implements SongStyleService {
   }
 
   @Override
+  @Logger
   public UpdateSongStyleResponse update(UUID id, UpdateSongStyleRequest request) {
     rules.checkIfSongStyleExists(id);
     SongStyle oldSongStyle = mapper.forRequest().map(getById(id), SongStyle.class);
@@ -85,6 +91,7 @@ public class SongStyleManager implements SongStyleService {
   }
 
   @Override
+  @Logger
   public void delete(UUID id) {
     rules.checkIfSongStyleExists(id);
     repository.deleteById(id);

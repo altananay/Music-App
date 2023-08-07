@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllArtistsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetArtistResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateArtistResponse;
 import com.atmosware.musicapp.business.rules.ArtistBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.Artist;
 import com.atmosware.musicapp.repository.ArtistRepository;
@@ -24,6 +25,7 @@ public class ArtistManager implements ArtistService {
     private final ModelMapperService mapper;
     private final ArtistBusinessRules rules;
     @Override
+    @Logger
     public List<GetAllArtistsResponse> getAll() {
         List<Artist> artists = repository.findAll();
         List<GetAllArtistsResponse> responses = artists.stream().map(artist -> mapper.forResponse().map(artist, GetAllArtistsResponse.class)).toList();
@@ -31,6 +33,7 @@ public class ArtistManager implements ArtistService {
     }
 
     @Override
+    @Logger
     public GetArtistResponse getById(UUID id) {
         rules.checkIfArtistExists(id);
         Artist artist = repository.findById(id).orElseThrow();
@@ -39,6 +42,7 @@ public class ArtistManager implements ArtistService {
     }
 
     @Override
+    @Logger
     public CreateArtistResponse add(CreateArtistRequest request) {
         Artist artist = mapper.forRequest().map(request, Artist.class);
         artist.setId(UUID.randomUUID());
@@ -49,6 +53,7 @@ public class ArtistManager implements ArtistService {
     }
 
     @Override
+    @Logger
     public UpdateArtistResponse update(UUID id, UpdateArtistRequest request) {
         rules.checkIfArtistExists(id);
         Artist oldArtist = mapper.forRequest().map(getById(id), Artist.class);
@@ -62,6 +67,7 @@ public class ArtistManager implements ArtistService {
     }
 
     @Override
+    @Logger
     public void delete(UUID id) {
         rules.checkIfArtistExists(id);
         repository.deleteById(id);

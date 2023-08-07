@@ -8,6 +8,7 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllArtistAlbumsRespo
 import com.atmosware.musicapp.business.dto.responses.get.GetArtistAlbumResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateArtistAlbumResponse;
 import com.atmosware.musicapp.business.rules.ArtistAlbumBusinessRules;
+import com.atmosware.musicapp.common.utils.annotations.Logger;
 import com.atmosware.musicapp.core.utils.mappers.ModelMapperService;
 import com.atmosware.musicapp.entities.ArtistAlbum;
 import com.atmosware.musicapp.repository.ArtistAlbumRepository;
@@ -25,6 +26,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     private final ModelMapperService mapper;
     private final ArtistAlbumBusinessRules rules;
     @Override
+    @Logger
     public List<GetAllArtistAlbumsResponse> getAll() {
         List<ArtistAlbum> albums = repository.findAll();
         List<GetAllArtistAlbumsResponse> responses = albums.stream().map(album -> mapper.forResponse().map(album, GetAllArtistAlbumsResponse.class)).toList();
@@ -32,6 +34,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     }
 
     @Override
+    @Logger
     public GetArtistAlbumResponse getById(UUID id) {
         rules.checkIfArtistAlbumExists(id);
         ArtistAlbum album = repository.findById(id).orElseThrow();
@@ -40,6 +43,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     }
 
     @Override
+    @Logger
     public GetArtistAlbumResponse getFirstByArtistId(UUID id) {
         ArtistAlbum album = repository.findFirstByArtistId(id);
         GetArtistAlbumResponse response = mapper.forResponse().map(album, GetArtistAlbumResponse.class);
@@ -47,6 +51,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     }
 
     @Override
+    @Logger
     public CreateArtistAlbumResponse add(CreateArtistAlbumRequest request) {
         ArtistAlbum album = mapper.forRequest().map(request, ArtistAlbum.class);
         album.setId(UUID.randomUUID());
@@ -57,6 +62,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     }
 
     @Override
+    @Logger
     public UpdateArtistAlbumResponse update(UUID id, UpdateArtistAlbumRequest request) {
         rules.checkIfArtistAlbumExists(id);
         ArtistAlbum oldArtistAlbum = mapper.forRequest().map(getById(id), ArtistAlbum.class);
@@ -70,6 +76,7 @@ public class ArtistAlbumManager implements ArtistAlbumService {
     }
 
     @Override
+    @Logger
     public void delete(UUID id) {
         rules.checkIfArtistAlbumExists(id);
         repository.deleteById(id);
