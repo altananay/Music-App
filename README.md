@@ -1,4 +1,4 @@
-### Kullanılan Programlama Dili ve Veri Tabanı / Programming Language and Database Used
+### Kullanılan Programlama Dili ve Veri Tabanı
 
 ![Java][java]
 ![Spring Boot][spring]
@@ -33,16 +33,19 @@ En popüler şarkılar(favori sayısına göre)(Redis)(Pagination) <br>
 | Java Version | 17LTS  |
 | Framework | Spring Boot 3.0 |
 | Static Code Analysis | Sonarlint (SonarQube) |
-| Documenting | OpenAPI V3 - Swagger ![Swagger][swagger]  |
+| Documenting | OpenAPI V3 - Swagger  |
 | Protocols | RESTfull |
 | SQL DB | PostgreSQL |
 | Key-Value DB | Redis |
 | Logging | Slf4J, Logback |
-| Spring Security | JWT ![JWT][jwt] |
+| Spring Security | JWT |
 | Formatter | Google Java Formatter |
 | Metrics | Actuator |
 | Integrators | Prometheus |
 | UI | Grafana |
+
+ ![JWT][jwt]
+ ![Swagger][swagger] 
 
 [java]:https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
 [spring]:https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white
