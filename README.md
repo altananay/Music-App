@@ -1,30 +1,28 @@
-Java Version		17LTS
-Framework		Spring Boot 3.0
-Static Code Analysis	Sonarlint (SonarQube)
-Documenting		OpenAPI V3 - swagger
-Protocols		RESTfull
-SQL DB 			PostgreSQL
-Key-Value DB  	  	Redis
-Logging 		Slf4J, Logback
-Spring Security		JWT
 
-Metrics			Actuator
-Integrators		Prometheus
-UI			Grafana
+Kullanıcı Kayıt(Admin,User) <br>
+Kullanıcı Takip <br>
+Kullanıcı Favorileri(Şarkı) <br>
+Ortak Favoriler(İki kullanıcı birbirini takip etmeli) <br>
 
-Formatter 		Google Java Formatter
+(Admin) <br>
+Şarkı ekleme/çıkarma <br>
+Sanatçı ekleme/çıkarma <br>
+Albüm ekleme/çıkarma <br>
 
 
-Kullanıcı Kayıt(Admin,User)
-Kullanıcı Takip
-Kullanıcı Favorileri(Şarkı)
-Ortak Favoriler(İki kullanıcı birbirini takip etmeli)
+Şarkı/Sanatçı/Albüm/Tür'lere göre şarkı arama <br>
+En popüler şarkılar(favori sayısına göre)(Redis)(Pagination) <br>
 
-(Admin)
-Şarkı ekleme/çıkarma
-Sanatçı ekleme/çıkarma
-Albüm ekleme/çıkarma
-
-
-Şarkı/Sanatçı/Albüm/Tür'lere göre şarkı arama
-En popüler şarkılar(favori sayısına göre)(Redis)(Pagination)
+| Java Version | 17LTS  |
+| Framework | Spring Boot 3.0 |
+| Static Code Analysis | Sonarlint (SonarQube) |
+| Documenting | OpenAPI V3 - Swagger |
+| Protocols | RESTfull |
+| SQL DB | PostgreSQL |
+| Key-Value DB | Redis |
+| Logging | Slf4J, Logback |
+| Spring Security | JWT |
+| Formatter | Google Java Formatter |
+| Metrics | Actuator |
+| Integrators | Prometheus |
+| UI | Grafana |
