@@ -15,7 +15,7 @@ En popüler şarkılar(favori sayısına göre)(Redis)(Pagination) <br>
 
 ## Kullanılan Teknolojiler
 
-| Teknoloji / Teknik                                                                     |
+| Teknoloji / Teknik                      | .                                               |
 | ----------------- | ------------------------------------------------------------------ |
 | Java Version | 17LTS  |
 | Framework | Spring Boot 3.0 |
