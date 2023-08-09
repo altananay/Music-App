@@ -1,6 +1,8 @@
 package com.atmosware.musicapp.business.concretes;
 
+import com.atmosware.musicapp.business.abstracts.ArtistService;
 import com.atmosware.musicapp.business.abstracts.ArtistSongService;
+import com.atmosware.musicapp.business.abstracts.SongService;
 import com.atmosware.musicapp.business.dto.requests.create.CreateArtistSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdateArtistSongRequest;
 import com.atmosware.musicapp.business.dto.responses.create.CreateArtistSongResponse;
@@ -25,6 +27,8 @@ public class ArtistSongManager implements ArtistSongService {
     private final ArtistSongRepository repository;
     private final ModelMapperService mapper;
     private final ArtistSongBusinessRules rules;
+    private final ArtistService artistService;
+    private final SongService songService;
     @Override
     @Logger
     public List<GetAllArtistSongsResponse> getAll() {
@@ -80,6 +84,8 @@ public class ArtistSongManager implements ArtistSongService {
         artistSong.setUpdatedAt(LocalDateTime.now());
         repository.save(artistSong);
         UpdateArtistSongResponse response = mapper.forResponse().map(artistSong, UpdateArtistSongResponse.class);
+        response.setArtistName(artistService.getById(request.getArtistId()).getName());
+        response.setSongName(artistService.getById(request.getSongId()).getName());
         return response;
     }
 

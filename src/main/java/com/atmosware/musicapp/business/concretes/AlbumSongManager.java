@@ -1,6 +1,8 @@
 package com.atmosware.musicapp.business.concretes;
 
+import com.atmosware.musicapp.business.abstracts.AlbumService;
 import com.atmosware.musicapp.business.abstracts.AlbumSongService;
+import com.atmosware.musicapp.business.abstracts.SongService;
 import com.atmosware.musicapp.business.dto.requests.create.CreateAlbumSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdateAlbumSongRequest;
 import com.atmosware.musicapp.business.dto.responses.create.CreateAlbumSongResponse;
@@ -25,6 +27,8 @@ public class AlbumSongManager implements AlbumSongService {
     private final AlbumSongRepository repository;
     private final AlbumSongBusinessRules rules;
     private final ModelMapperService mapper;
+    private final AlbumService albumService;
+    private final SongService songService;
 
     @Override
     @Logger
@@ -80,6 +84,9 @@ public class AlbumSongManager implements AlbumSongService {
         albumSong.setUpdatedAt(LocalDateTime.now());
         repository.save(albumSong);
         UpdateAlbumSongResponse response = mapper.forResponse().map(albumSong, UpdateAlbumSongResponse.class);
+        response.setAlbumName(albumService.getById(request.getAlbumId()).getName());
+        response.setAlbumYear(albumService.getById(request.getAlbumId()).getYear());
+        response.setSongName(songService.getById(request.getSongId()).getName());
         return response;
     }
 

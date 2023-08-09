@@ -15,6 +15,8 @@ import com.atmosware.musicapp.repository.AdminRepository;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,7 @@ public class AdminAuthenticationManager implements AdminAuthenticationService {
     private final ModelMapperService mapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-
+    private final AuthenticationManager authenticationManager;
     @Override
     @Logger
     public RegisterResponse register(RegisterRequest request) {
@@ -43,7 +45,12 @@ public class AdminAuthenticationManager implements AdminAuthenticationService {
     @Override
     @Logger
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
         var admin = repository.findByEmail(request.getEmail());
         HashMap<String, Object> payload = new HashMap<>();
         for (var role: admin.getAuthorities())

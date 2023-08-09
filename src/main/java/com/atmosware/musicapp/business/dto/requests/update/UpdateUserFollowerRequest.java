@@ -14,5 +14,5 @@ import java.util.UUID;
 public class UpdateUserFollowerRequest {
     private UUID id;
     private UUID userId;
-    private UUID followerId;
+    private UUID followedUserId;
 }

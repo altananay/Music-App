@@ -18,7 +18,7 @@ public class GetPopularSongResponse {
     private String songName;
     private UUID artistId;
     private String artistName;
-    private String favoriteCount;
+    private int favoriteCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

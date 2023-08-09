@@ -12,6 +12,9 @@ import java.util.UUID;
 public interface PopularSongService {
     CreatePopularSongResponse add(CreatePopularSongRequest request);
     GetPopularSongResponse getById(UUID id);
+
+    GetPopularSongResponse getBySongId(UUID id);
+
     UpdatePopularSongResponse update(UUID id, UpdatePopularSongRequest request);
     void delete(UUID id);
     List<GetAllPopularSongsResponse> getAll();

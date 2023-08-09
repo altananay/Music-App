@@ -14,5 +14,5 @@ import java.util.UUID;
 public class UpdatePopularSongRequest {
     private UUID songId;
     private UUID artistId;
-    private UUID albumId;
+    private int favoriteCount;
 }

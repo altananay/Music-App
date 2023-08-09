@@ -13,7 +13,6 @@ import java.util.UUID;
 public interface UserService {
     List<GetAllUsersResponse> getAll();
     GetUserResponse getById(UUID id);
-    CreateUserResponse add(CreateUserRequest request);
     UpdateUserResponse update(UUID id, UpdateUserRequest request);
     void delete(UUID id);
 }

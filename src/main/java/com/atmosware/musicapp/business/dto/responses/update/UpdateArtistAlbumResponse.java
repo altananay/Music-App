@@ -15,7 +15,10 @@ import java.util.UUID;
 public class UpdateArtistAlbumResponse {
     private UUID id;
     private UUID artistId;
+    private String artistName;
     private UUID albumId;
+    private String albumName;
+    private String albumYear;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

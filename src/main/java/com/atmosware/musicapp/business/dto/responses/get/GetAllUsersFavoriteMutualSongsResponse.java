@@ -1,4 +1,4 @@
-package com.atmosware.musicapp.business.dto.responses.create;
+package com.atmosware.musicapp.business.dto.responses.get;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,12 +12,13 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateArtistSongResponse {
+public class GetAllUsersFavoriteMutualSongsResponse {
     private UUID id;
-    private UUID artistId;
-    private String artistName;
     private UUID songId;
+    private UUID userId;
+    private String userUsername;
     private String songName;
+    private String secondUser;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

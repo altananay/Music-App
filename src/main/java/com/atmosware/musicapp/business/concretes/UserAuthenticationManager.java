@@ -15,6 +15,8 @@ import com.atmosware.musicapp.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class UserAuthenticationManager implements UserAuthenticationService {
     private final ModelMapperService mapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     @Logger
@@ -43,6 +46,12 @@ public class UserAuthenticationManager implements UserAuthenticationService {
     @Override
     @Logger
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
         var user = repository.findByEmail(request.getEmail());
         HashMap<String, Object> payload = new HashMap<>();
         for (var role: user.getAuthorities())

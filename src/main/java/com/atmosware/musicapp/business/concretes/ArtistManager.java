@@ -61,6 +61,7 @@ public class ArtistManager implements ArtistService {
         artist.setId(id);
         artist.setCreatedAt(oldArtist.getCreatedAt());
         artist.setUpdatedAt(LocalDateTime.now());
+        artist.setName(request.getName());
         repository.save(artist);
         UpdateArtistResponse response = mapper.forResponse().map(artist, UpdateArtistResponse.class);
         return response;

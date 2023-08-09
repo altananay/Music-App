@@ -16,4 +16,15 @@ public class PopularSongBusinessRules {
   public void checkIfPopularSongExists(UUID id) {
     if (!repository.existsById(id)) throw new BusinessException(Messages.PopularSong.NOT_EXISTS);
   }
+
+  public boolean checkIfPopularSongExistsBySongId(UUID id)
+  {
+    return repository.existsBySongId(id);
+  }
+
+  public void checkIfPopularSongExistsBySongIdThrowException(UUID id)
+  {
+    if (!repository.existsBySongId(id))
+      throw new BusinessException("Bu şarkı popüler muzik listesinde yok");
+  }
 }

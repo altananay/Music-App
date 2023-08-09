@@ -20,7 +20,6 @@ public class UserFollower extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     @ManyToOne
     private User followedUser;
 }

@@ -14,6 +14,7 @@ import com.atmosware.musicapp.entities.User;
 import com.atmosware.musicapp.entities.enums.Role;
 import com.atmosware.musicapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class UserManager implements UserService {
     private final UserRepository repository;
     private final ModelMapperService mapper;
     private final UserBusinessRules rules;
+    private final PasswordEncoder passwordEncoder;
     @Override
     @Logger
     public List<GetAllUsersResponse> getAll() {
@@ -43,17 +45,6 @@ public class UserManager implements UserService {
         return response;
     }
 
-    @Override
-    @Logger
-    public CreateUserResponse add(CreateUserRequest request) {
-        User user = mapper.forRequest().map(request, User.class);
-        user.setId(UUID.randomUUID());
-        user.setRole(Role.USER);
-        user.setCreatedAt(LocalDateTime.now());
-        User createdUser = repository.save(user);
-        CreateUserResponse response = mapper.forResponse().map(createdUser, CreateUserResponse.class);
-        return response;
-    }
 
     @Override
     @Logger
@@ -65,6 +56,7 @@ public class UserManager implements UserService {
         user.setRole(Role.USER);
         user.setCreatedAt(oldUser.getCreatedAt());
         user.setUpdatedAt(LocalDateTime.now());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         repository.save(user);
         UpdateUserResponse response = mapper.forResponse().map(user, UpdateUserResponse.class);
         return response;

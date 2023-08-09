@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 public class UserFollowerManager implements UserFollowerService {
 
   private final UserFollowerBusinessRules rules;
-  private final UserService service;
+  private final UserService userService;
   private final UserFollowerRepository repository;
   private final ModelMapperService mapper;
 
@@ -39,7 +39,7 @@ public class UserFollowerManager implements UserFollowerService {
                     mapper.forResponse().map(userFollower, GetAllUsersFollowersResponse.class))
             .toList();
     for (var response : responses) {
-      response.setFollowerUsername(service.getById(response.getFollowedUserId()).getUsername());
+      response.setFollowerUsername(userService.getById(response.getFollowedUserId()).getUsername());
     }
     return responses;
   }
@@ -51,6 +51,7 @@ public class UserFollowerManager implements UserFollowerService {
     UserFollower userFollower = repository.findById(id).orElseThrow();
     GetUserFollowerResponse response =
         mapper.forResponse().map(userFollower, GetUserFollowerResponse.class);
+    response.setFollowerUsername(userService.getById(response.getFollowedUserId()).getUsername());
     return response;
   }
 
@@ -65,7 +66,7 @@ public class UserFollowerManager implements UserFollowerService {
                     mapper.forResponse().map(userFollower, GetAllUsersFollowersResponse.class))
             .toList();
     for (var response : responses) {
-      response.setFollowerUsername(service.getById(response.getFollowedUserId()).getUsername());
+      response.setFollowerUsername(userService.getById(response.getFollowedUserId()).getUsername());
     }
     return responses;
   }
@@ -79,7 +80,7 @@ public class UserFollowerManager implements UserFollowerService {
     UserFollower createdUserFollower = repository.save(userFollower);
     CreateUserFollowerResponse response =
         mapper.forResponse().map(createdUserFollower, CreateUserFollowerResponse.class);
-    response.setFollowerUsername(service.getById(request.getFollowedUserId()).getUsername());
+    response.setFollowerUsername(userService.getById(request.getFollowedUserId()).getUsername());
     return response;
   }
 
@@ -92,10 +93,10 @@ public class UserFollowerManager implements UserFollowerService {
     userFollower.setId(id);
     userFollower.setCreatedAt(oldUserFollower.getCreatedAt());
     userFollower.setUpdatedAt(LocalDateTime.now());
-    repository.save(userFollower);
+    UserFollower updatedUserFollower = repository.save(userFollower);
     UpdateUserFollowerResponse response =
-        mapper.forResponse().map(userFollower, UpdateUserFollowerResponse.class);
-    response.setFollowerUsername(service.getById(request.getFollowerId()).getUsername());
+        mapper.forResponse().map(updatedUserFollower, UpdateUserFollowerResponse.class);
+    response.setFollowerUsername(userService.getById(request.getFollowedUserId()).getUsername());
     return response;
   }
 

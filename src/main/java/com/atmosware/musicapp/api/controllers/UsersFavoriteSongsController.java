@@ -4,6 +4,7 @@ import com.atmosware.musicapp.business.abstracts.UserFavoriteSongService;
 import com.atmosware.musicapp.business.dto.requests.create.CreateUserFavoriteSongRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdateUserFavoriteSongRequest;
 import com.atmosware.musicapp.business.dto.responses.create.CreateUserFavoriteSongResponse;
+import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFavoriteMutualSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersFavoriteSongsResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserFavoriteSongResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFavoriteSongResponse;
@@ -29,7 +30,7 @@ public class UsersFavoriteSongsController {
   }
 
   @GetMapping("/getMutualSongsByUsers")
-  public List<GetAllUsersFavoriteSongsResponse> getAllByUserId(@RequestParam UUID firstUserId, @RequestParam UUID secondUserId) {
+  public List<GetAllUsersFavoriteMutualSongsResponse> getAllByUserId(@RequestParam UUID firstUserId, @RequestParam UUID secondUserId) {
     return service.getMutualSongsByUsersId(firstUserId, secondUserId);
   }
 

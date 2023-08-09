@@ -1,19 +1,15 @@
 package com.atmosware.musicapp.api.controllers;
 
 import com.atmosware.musicapp.business.abstracts.UserService;
-import com.atmosware.musicapp.business.dto.requests.create.CreateUserRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdateUserRequest;
-import com.atmosware.musicapp.business.dto.responses.create.CreateUserResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllUsersResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetUserResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserResponse;
-import jakarta.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -32,13 +28,6 @@ public class UsersController {
     public GetUserResponse getById(@PathVariable UUID id)
     {
         return service.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CreateUserResponse add(@RequestBody @Valid CreateUserRequest request)
-    {
-        return service.add(request);
     }
 
     @PutMapping("/{id}")

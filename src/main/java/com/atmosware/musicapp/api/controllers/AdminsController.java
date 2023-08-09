@@ -1,17 +1,12 @@
 package com.atmosware.musicapp.api.controllers;
 
 import com.atmosware.musicapp.business.abstracts.AdminService;
-import com.atmosware.musicapp.business.dto.requests.create.CreateAdminRequest;
 import com.atmosware.musicapp.business.dto.requests.update.UpdateAdminRequest;
-import com.atmosware.musicapp.business.dto.responses.create.CreateAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAdminResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllAdminsResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateAdminResponse;
-import com.atmosware.musicapp.repository.AdminRepository;
 import java.util.List;
 import java.util.UUID;
-
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +27,6 @@ public class AdminsController {
     public GetAdminResponse getById(@PathVariable UUID id)
     {
         return service.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CreateAdminResponse add(@RequestBody @Valid CreateAdminRequest request)
-    {
-        return service.add(request);
     }
 
     @PutMapping("/{id}")

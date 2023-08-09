@@ -13,7 +13,6 @@ import java.util.UUID;
 public interface AdminService {
     List<GetAllAdminsResponse> getAll();
     GetAdminResponse getById(UUID id);
-    CreateAdminResponse add(CreateAdminRequest request);
     UpdateAdminResponse update(UUID id, UpdateAdminRequest request);
     void delete(UUID id);
 }

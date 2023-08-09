@@ -27,13 +27,14 @@ public class RestExceptionHandler {
     for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
       validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
     }
-
+    log.error(exception.getMessage(), exception);
     return new ExceptionResult<>(ExceptionTypes.Exception.Validation, exception.getMessage());
   }
 
   @ExceptionHandler
   @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY) // 422
   public ExceptionResult<Object> handleValidationException(ValidationException exception) {
+    log.error(exception.getMessage(), exception);
     return new ExceptionResult<>(ExceptionTypes.Exception.Validation, exception.getMessage());
   }
   
@@ -48,6 +49,7 @@ public class RestExceptionHandler {
   @ResponseStatus(HttpStatus.CONFLICT) // 409
   public ExceptionResult<Object> handleDataIntegrityViolation(
       DataIntegrityViolationException exception) {
+    log.error(exception.getMessage(), exception);
     return new ExceptionResult<>(
         ExceptionTypes.Exception.DataIntegrityViolation, exception.getMessage());
   }
@@ -55,6 +57,7 @@ public class RestExceptionHandler {
   @ExceptionHandler
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500
   public ExceptionResult<Object> handleRuntimeException(RuntimeException exception) {
+    log.error(exception.getMessage(), exception);
     return new ExceptionResult<>(ExceptionTypes.Exception.Runtime, exception.getMessage());
   }
 }
