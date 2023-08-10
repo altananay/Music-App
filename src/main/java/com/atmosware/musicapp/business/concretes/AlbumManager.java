@@ -48,6 +48,7 @@ public class AlbumManager implements AlbumService {
     @Override
     @Logger
     public CreateAlbumResponse add(CreateAlbumRequest request) {
+        rules.checkIfAlbumExistsByName(request.getName());
         Album album = mapper.forRequest().map(request, Album.class);
         album.setId(UUID.randomUUID());
         album.setCreatedAt(LocalDateTime.now());
@@ -60,6 +61,7 @@ public class AlbumManager implements AlbumService {
     @Logger
     public UpdateAlbumResponse update(UUID id, UpdateAlbumRequest request) {
         rules.checkIfAlbumExists(id);
+        rules.checkIfAlbumExistsByName(request.getName());
         Album oldAlbum = mapper.forRequest().map(getById(id), Album.class);
         Album album = mapper.forRequest().map(request, Album.class);
         album.setId(id);

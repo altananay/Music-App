@@ -50,6 +50,8 @@ public class UserManager implements UserService {
     @Logger
     public UpdateUserResponse update(UUID id, UpdateUserRequest request) {
         rules.checkIfUserExists(id);
+        rules.checkIfUserExistsByEmailAlternative(request.getEmail());
+        rules.checkIfUserExistsByUsername(request.getUsername());
         User oldUser = mapper.forRequest().map(getById(id), User.class);
         User user = mapper.forRequest().map(request, User.class);
         user.setId(id);

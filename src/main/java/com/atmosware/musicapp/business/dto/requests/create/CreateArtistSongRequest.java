@@ -1,5 +1,6 @@
 package com.atmosware.musicapp.business.dto.requests.create;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.util.UUID;
 @Getter
 @Setter
 public class CreateArtistSongRequest {
+    @NotNull
     private UUID artistId;
+    @NotNull
     private UUID songId;
 }

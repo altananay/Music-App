@@ -15,4 +15,10 @@ public class StyleBusinessRules {
   public void checkIfStyleExists(UUID id) {
     if (!repository.existsById(id)) throw new BusinessException(Messages.Style.NOT_EXISTS);
   }
+
+  public void checkIfStyleExistsByName(String name)
+  {
+    if (repository.existsByNameIgnoreCase(name))
+      throw new BusinessException(Messages.Style.STYLE_ALREADY_EXISTS);
+  }
 }

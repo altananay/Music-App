@@ -10,6 +10,9 @@ import com.atmosware.musicapp.business.dto.responses.get.GetUserFavoriteSongResp
 import com.atmosware.musicapp.business.dto.responses.update.UpdateUserFavoriteSongResponse;
 import java.util.List;
 import java.util.UUID;
+
+import com.atmosware.musicapp.repository.UserFavoriteSongRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +50,7 @@ public class UsersFavoriteSongsController {
 
   @PutMapping("/{id}")
   public UpdateUserFavoriteSongResponse update(
-      @PathVariable UUID id, @RequestBody UpdateUserFavoriteSongRequest request) {
+      @PathVariable UUID id, @RequestBody @Valid UpdateUserFavoriteSongRequest request) {
     return service.update(id, request);
   }
 

@@ -16,4 +16,10 @@ public class ArtistBusinessRules {
   public void checkIfArtistExists(UUID id) {
     if (!repository.existsById(id)) throw new BusinessException(Messages.Artist.NOT_EXISTS);
   }
+
+  public void checkIfArtistExistsByName(String name)
+  {
+    if (repository.existsByNameIgnoreCase(name))
+      throw new BusinessException(Messages.Artist.ARTIST_ALREADY_EXISTS);
+  }
 }

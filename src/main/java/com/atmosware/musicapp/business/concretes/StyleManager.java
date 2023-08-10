@@ -49,6 +49,7 @@ public class StyleManager implements StyleService {
   @Override
   @Logger
   public CreateStyleResponse add(CreateStyleRequest request) {
+    rules.checkIfStyleExistsByName(request.getName());
     Style style = mapper.forRequest().map(request, Style.class);
     style.setId(UUID.randomUUID());
     style.setCreatedAt(LocalDateTime.now());
@@ -62,6 +63,7 @@ public class StyleManager implements StyleService {
   @Logger
   public UpdateStyleResponse update(UUID id, UpdateStyleRequest request) {
     rules.checkIfStyleExists(id);
+    rules.checkIfStyleExistsByName(request.getName());
     Style oldStyle = mapper.forRequest().map(getById(id), Style.class);
     Style style = mapper.forRequest().map(request, Style.class);
     style.setId(id);

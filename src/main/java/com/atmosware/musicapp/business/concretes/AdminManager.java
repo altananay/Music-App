@@ -46,6 +46,8 @@ public class AdminManager implements AdminService {
     @Logger
     public UpdateAdminResponse update(UUID id, UpdateAdminRequest request) {
         rules.checkIfAdminExists(id);
+        rules.checkIfAdminExistsByUsername(request.getUsername());
+        rules.checkIfAdminExistsByEmailAlternative(request.getEmail());
         Admin oldAdmin = mapper.forRequest().map(getById(id), Admin.class);
         Admin newAdmin = mapper.forRequest().map(request, Admin.class);
         newAdmin.setId(id);

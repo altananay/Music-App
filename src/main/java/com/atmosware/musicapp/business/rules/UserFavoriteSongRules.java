@@ -16,4 +16,10 @@ public class UserFavoriteSongRules {
     if (!repository.existsById(id))
       throw new BusinessException(Messages.UserFavoriteSong.NOT_EXISTS);
   }
+
+  public void checkIfUserFavoriteSongExistsByUserIdAndSongId(UUID userId, UUID songId)
+  {
+    if (repository.existsByUserIdAndSongId(userId, songId))
+      throw new BusinessException(Messages.UserFavoriteSong.USER_FAVORITE_SONG_ALREADY_EXISTS);
+  }
 }

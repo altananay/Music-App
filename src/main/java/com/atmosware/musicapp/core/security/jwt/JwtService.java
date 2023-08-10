@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwtService {
 
-
   @Value("${application.security.jwt.secret-key}")
   private String secretKey;
+
   @Value("${application.security.jwt.expiration}")
   private long jwtExpiration;
 
@@ -33,7 +33,7 @@ public class JwtService {
   }
 
   public String extractEmail(String jwt) {
-    var email =
+    return
         Jwts.parserBuilder()
             .setSigningKey(getSignInKey())
             .build()
@@ -42,13 +42,9 @@ public class JwtService {
             .toString()
             .split(",")[1]
             .substring(7);
-    return email;
   }
 
-  public String generateToken(
-      Map<String, Object> extractClaims, UserDetails userDetails) {
-    // String roles =
-    // authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
+  public String generateToken(Map<String, Object> extractClaims, UserDetails userDetails) {
 
     return Jwts.builder()
         .setClaims(extractClaims)

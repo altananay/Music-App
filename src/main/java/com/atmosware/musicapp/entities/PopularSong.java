@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PopularSong extends BaseEntity implements Serializable {
+public class PopularSong extends BaseEntity {
     @Indexed
     private UUID songId;
     private String songName;

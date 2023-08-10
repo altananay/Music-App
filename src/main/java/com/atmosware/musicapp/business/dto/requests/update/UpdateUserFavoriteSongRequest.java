@@ -1,5 +1,7 @@
 package com.atmosware.musicapp.business.dto.requests.update;
 
+import com.atmosware.musicapp.common.constants.Messages;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserFavoriteSongRequest {
-    private UUID id;
+    @NotNull(message = Messages.Validation.UUID)
     private UUID userId;
+    @NotNull(message = Messages.Validation.UUID)
     private UUID songId;
 }

@@ -1,5 +1,8 @@
 package com.atmosware.musicapp.api.controllers;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.lenient;
+
 import com.atmosware.musicapp.business.concretes.AdminAuthenticationManager;
 import com.atmosware.musicapp.common.constants.Messages;
 import com.atmosware.musicapp.core.utils.dto.AuthenticationRequest;
@@ -11,14 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.method.annotation.ModelFactory;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 class AdminAuthenticationControllerTest {
@@ -59,7 +56,7 @@ class AdminAuthenticationControllerTest {
   void authenticate()
   {
     AuthenticationRequest request = new AuthenticationRequest();
-    request.setEmail("altan2@altan.com");
+    request.setEmail("altan@altan.com");
     request.setPassword("12345");
     AuthenticationResponse response = new AuthenticationResponse();
     response.setResult(Messages.Authentication.AUTH_SUCCESSFUL);

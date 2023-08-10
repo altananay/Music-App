@@ -16,4 +16,10 @@ public class SongBusinessRules {
   public void checkIfSongExists(UUID id) {
     if (!repository.existsById(id)) throw new BusinessException(Messages.Song.NOT_EXISTS);
   }
+
+  public void checkIfSongExistsByName(String name)
+  {
+    if (repository.existsByNameIgnoreCase(name))
+      throw new BusinessException(Messages.Song.SONG_ALREADY_EXISTS);
+  }
 }

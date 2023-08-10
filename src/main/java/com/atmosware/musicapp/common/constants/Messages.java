@@ -9,6 +9,8 @@ public class Messages {
         private Admin() {}
 
         public static final String NOT_EXISTS = "Admin bulunamadı";
+        public static final String ADMIN_ALREADY_EXISTS_EMAIL = "Bu emaile sahip admin daha önce kayıt olmuş";
+        public static final String ADMIN_ALREADY_EXISTS_USERNAME = "Bu kullanıcı adına sahip admin daha önce kayıt olmuş";
     }
 
     public static class Album
@@ -16,6 +18,7 @@ public class Messages {
         private Album() {}
 
         public static final String NOT_EXISTS = "Album bulunamadı";
+        public static final String ALBUM_ALREADY_EXISTS = "Bu album daha önce eklenmiş";
     }
 
     public static class ArtistAlbum
@@ -30,6 +33,7 @@ public class Messages {
         private Artist() {}
 
         public static final String NOT_EXISTS = "Sanatçı bulunamadı";
+        public static final String ARTIST_ALREADY_EXISTS = "Sanatçı daha önce eklenmiş";
     }
 
     public static class ArtistSong
@@ -52,6 +56,7 @@ public class Messages {
         private Song() {}
 
         public static final String NOT_EXISTS = "Muzik bulunamadı";
+        public static final String SONG_ALREADY_EXISTS = "Müzik daha önce eklenmiş";
     }
 
     public static class SongStyle
@@ -66,6 +71,7 @@ public class Messages {
         private Style() {}
 
         public static final String NOT_EXISTS = "Müzik tarzı bulunamadı";
+        public static final String STYLE_ALREADY_EXISTS = "Bu muzik tarzı daha önce eklenmiş";
     }
 
     public static class User
@@ -73,6 +79,8 @@ public class Messages {
         private User() {}
 
         public static final String NOT_EXISTS = "Kullanıcı bulunamadı";
+        public static final String USER_ALREADY_EXISTS_EMAIL = "Bu emaile sahip kullanıcı daha önce kayıt olmuş";
+        public static final String USER_ALREADY_EXISTS_USERNAME = "Bu kullanıcı adıyla başka bir kullanıcı kayıt olmuş";
     }
 
     public static class UserFavoriteSong
@@ -80,6 +88,7 @@ public class Messages {
         private UserFavoriteSong() {}
 
         public static final String NOT_EXISTS = "Kullanıcının favori muzikleri bulunamadı";
+        public static final String USER_FAVORITE_SONG_ALREADY_EXISTS = "Kullanıcı bu şarkıyı daha önce favoriye eklemiş.";
     }
 
     public static class UserFollower
@@ -88,6 +97,7 @@ public class Messages {
 
         public static final String NOT_EXISTS = "Kullanıcının takipçileri bulunamadı";
         public static final String USERS_NOT_FOLLOWING_EACH_OTHER = "Kullanıcılar birbirlerini takip etmiyor.";
+        public static final String USERS_FOLLOWING_EACH_OTHER = "Kullanıcılar zaten birbirlerini takip ediyor.";
     }
 
     public static class AlbumSong
@@ -120,5 +130,12 @@ public class Messages {
         public static final String REQUEST_HEADER = "Authorization";
         public static final String TOKEN_PREFIX = "Bearer ";
         public static final String ROLE_PREFIX = "ROLE_";
+    }
+
+    public static class Validation
+    {
+        private Validation() {}
+
+        public static final String UUID = "UUID doesn't be null.";
     }
 }

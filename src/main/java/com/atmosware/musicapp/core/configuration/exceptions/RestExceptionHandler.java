@@ -28,21 +28,21 @@ public class RestExceptionHandler {
       validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
     }
     log.error(exception.getMessage(), exception);
-    return new ExceptionResult<>(ExceptionTypes.Exception.Validation, exception.getMessage());
+    return new ExceptionResult<>(ExceptionTypes.Exceptions.VALIDATION_EXCEPTION, exception.getMessage());
   }
 
   @ExceptionHandler
   @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY) // 422
   public ExceptionResult<Object> handleValidationException(ValidationException exception) {
     log.error(exception.getMessage(), exception);
-    return new ExceptionResult<>(ExceptionTypes.Exception.Validation, exception.getMessage());
+    return new ExceptionResult<>(ExceptionTypes.Exceptions.VALIDATION_EXCEPTION, exception.getMessage());
   }
   
   @ExceptionHandler
   @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY) // 422
   public ExceptionResult<Object> handleBusinessException(BusinessException exception) {
     log.error(exception.getMessage(), exception);
-    return new ExceptionResult<>(ExceptionTypes.Exception.Business, exception.getMessage());
+    return new ExceptionResult<>(ExceptionTypes.Exceptions.BUSINESS_EXCEPTION, exception.getMessage());
   }
   
   @ExceptionHandler
@@ -51,13 +51,13 @@ public class RestExceptionHandler {
       DataIntegrityViolationException exception) {
     log.error(exception.getMessage(), exception);
     return new ExceptionResult<>(
-        ExceptionTypes.Exception.DataIntegrityViolation, exception.getMessage());
+        ExceptionTypes.Exceptions.DATA_INTEGRITY_VIOLATION, exception.getMessage());
   }
   
   @ExceptionHandler
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500
   public ExceptionResult<Object> handleRuntimeException(RuntimeException exception) {
     log.error(exception.getMessage(), exception);
-    return new ExceptionResult<>(ExceptionTypes.Exception.Runtime, exception.getMessage());
+    return new ExceptionResult<>(ExceptionTypes.Exceptions.RUNTIME_EXCEPTION, exception.getMessage());
   }
 }

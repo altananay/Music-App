@@ -22,4 +22,10 @@ public class UserFollowerBusinessRules {
     if (!(repository.existsByUserIdAndFollowedUserId(firstUserId, secondUserId) && repository.existsByUserIdAndFollowedUserId(secondUserId, firstUserId)))
       throw new BusinessException(Messages.UserFollower.USERS_NOT_FOLLOWING_EACH_OTHER);
   }
+
+  public void checkIfUserFollowEachOtherAlternative(UUID firstUserId, UUID secondUserId)
+  {
+    if ((repository.existsByUserIdAndFollowedUserId(firstUserId, secondUserId) && repository.existsByUserIdAndFollowedUserId(secondUserId, firstUserId)))
+      throw new BusinessException(Messages.UserFollower.USERS_FOLLOWING_EACH_OTHER);
+  }
 }

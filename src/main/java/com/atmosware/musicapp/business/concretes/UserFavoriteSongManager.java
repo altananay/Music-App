@@ -100,6 +100,7 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   @Logger
   public CreateUserFavoriteSongResponse add(CreateUserFavoriteSongRequest request) {
     artistSongBusinessRules.checkIfArtistSongExistsBySongId(request.getSongId());
+    rules.checkIfUserFavoriteSongExistsByUserIdAndSongId(request.getUserId(), request.getSongId());
     UserFavoriteSong userFavoriteSong = mapper.forRequest().map(request, UserFavoriteSong.class);
     userFavoriteSong.setId(UUID.randomUUID());
     userFavoriteSong.setCreatedAt(LocalDateTime.now());
@@ -120,8 +121,8 @@ public class UserFavoriteSongManager implements UserFavoriteSongService {
   @Logger
   public UpdateUserFavoriteSongResponse update(UUID id, UpdateUserFavoriteSongRequest request) {
     artistSongBusinessRules.checkIfArtistSongExistsBySongId(request.getSongId());
-
     rules.checkIfUserFavoriteSongExists(id);
+    rules.checkIfUserFavoriteSongExistsByUserIdAndSongId(request.getUserId(), request.getSongId());
     UserFavoriteSong oldUserFavoriteSong =
         mapper.forRequest().map(getById(id), UserFavoriteSong.class);
     UserFavoriteSong newUserFavoriteSong = mapper.forRequest().map(request, UserFavoriteSong.class);

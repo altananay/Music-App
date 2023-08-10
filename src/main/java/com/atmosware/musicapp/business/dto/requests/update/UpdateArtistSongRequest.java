@@ -1,5 +1,6 @@
 package com.atmosware.musicapp.business.dto.requests.update;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateArtistSongRequest {
-    private UUID id;
+    @NotNull
     private UUID artistId;
+    @NotNull
     private UUID songId;
 }

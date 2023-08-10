@@ -44,6 +44,7 @@ public class ArtistManager implements ArtistService {
     @Override
     @Logger
     public CreateArtistResponse add(CreateArtistRequest request) {
+        rules.checkIfArtistExistsByName(request.getName());
         Artist artist = mapper.forRequest().map(request, Artist.class);
         artist.setId(UUID.randomUUID());
         artist.setCreatedAt(LocalDateTime.now());
@@ -56,6 +57,7 @@ public class ArtistManager implements ArtistService {
     @Logger
     public UpdateArtistResponse update(UUID id, UpdateArtistRequest request) {
         rules.checkIfArtistExists(id);
+        rules.checkIfArtistExistsByName(request.getName());
         Artist oldArtist = mapper.forRequest().map(getById(id), Artist.class);
         Artist artist = mapper.forRequest().map(request, Artist.class);
         artist.setId(id);

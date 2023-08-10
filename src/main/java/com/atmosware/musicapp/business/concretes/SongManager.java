@@ -45,6 +45,7 @@ public class SongManager implements SongService {
     @Override
     @Logger
     public CreateSongResponse add(CreateSongRequest request) {
+        rules.checkIfSongExistsByName(request.getName());
         Song song = mapper.forRequest().map(request, Song.class);
         song.setId(UUID.randomUUID());
         song.setCreatedAt(LocalDateTime.now());
@@ -57,6 +58,7 @@ public class SongManager implements SongService {
     @Logger
     public UpdateSongResponse update(UUID id, UpdateSongRequest request) {
         rules.checkIfSongExists(id);
+        rules.checkIfSongExistsByName(request.getName());
         Song oldSong = mapper.forRequest().map(getById(id), Song.class);
         Song song = mapper.forRequest().map(request, Song.class);
         song.setId(id);
