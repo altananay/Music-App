@@ -139,4 +139,10 @@ public class PopularSongManager implements PopularSongService {
             .toList();
     return responses;
   }
+
+  @Override
+  public List<GetAllPopularSongsResponse> getAllByArtistId(UUID id) {
+    List<PopularSong> popularSongs = repository.getAllByArtistId(id);
+    return popularSongs.stream().map(popularSong -> mapperService.forResponse().map(popularSong, GetAllPopularSongsResponse.class)).toList();
+  }
 }

@@ -19,4 +19,5 @@ public interface PopularSongService {
     void delete(UUID id);
     List<GetAllPopularSongsResponse> getAll();
     List<GetAllPopularSongsResponse> getAllByPagination(int pageNumber, int pageSize);
+    List<GetAllPopularSongsResponse> getAllByArtistId(UUID id);
 }

@@ -6,6 +6,9 @@ import com.atmosware.musicapp.business.dto.responses.get.GetAllPopularSongsRespo
 import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import java.util.List;
 import java.util.UUID;
+
+import com.atmosware.musicapp.entities.PopularSong;
+import com.atmosware.musicapp.repository.PopularSongRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,12 @@ public class PopularSongsController {
     public List<GetAllPopularSongsResponse> getAll()
     {
         return service.getAll();
+    }
+
+    @GetMapping("/getAllByArtistId/{id}")
+    public List<GetAllPopularSongsResponse> getAllByArtistId(@RequestParam UUID id)
+    {
+        return service.getAllByArtistId(id);
     }
 
     @GetMapping("/{id}")
