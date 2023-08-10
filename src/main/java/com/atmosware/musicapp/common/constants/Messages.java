@@ -98,6 +98,7 @@ public class Messages {
         public static final String NOT_EXISTS = "Kullanıcının takipçileri bulunamadı";
         public static final String USERS_NOT_FOLLOWING_EACH_OTHER = "Kullanıcılar birbirlerini takip etmiyor.";
         public static final String USERS_FOLLOWING_EACH_OTHER = "Kullanıcılar zaten birbirlerini takip ediyor.";
+        public static final String USER_ALREADY_FOLLOW = "Bu kullanıcıyı zaten takip ediyorsun.";
     }
 
     public static class AlbumSong

@@ -74,7 +74,7 @@ public class UserFollowerManager implements UserFollowerService {
   @Override
   @Logger
   public CreateUserFollowerResponse add(CreateUserFollowerRequest request) {
-    rules.checkIfUserFollowEachOtherAlternative(request.getUserId(), request.getFollowedUserId());
+    rules.checkIfUserFollow(request.getUserId(), request.getFollowedUserId());
     UserFollower userFollower = mapper.forRequest().map(request, UserFollower.class);
     userFollower.setId(UUID.randomUUID());
     userFollower.setCreatedAt(LocalDateTime.now());
@@ -89,7 +89,7 @@ public class UserFollowerManager implements UserFollowerService {
   @Logger
   public UpdateUserFollowerResponse update(UUID id, UpdateUserFollowerRequest request) {
     rules.checkIfUserFollowerExists(id);
-    rules.checkIfUserFollowEachOtherAlternative(request.getUserId(), request.getFollowedUserId());
+    rules.checkIfUserFollow(request.getUserId(), request.getFollowedUserId());
     UserFollower oldUserFollower = mapper.forRequest().map(getById(id), UserFollower.class);
     UserFollower userFollower = mapper.forRequest().map(request, UserFollower.class);
     userFollower.setId(id);
