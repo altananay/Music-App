@@ -25,6 +25,6 @@ public class PopularSongBusinessRules {
   public void checkIfPopularSongExistsBySongIdThrowException(UUID id)
   {
     if (!repository.existsBySongId(id))
-      throw new BusinessException("Bu şarkı popüler muzik listesinde yok");
+      throw new BusinessException(Messages.PopularSong.MUSIC_NOT_EXISTS);
   }
 }

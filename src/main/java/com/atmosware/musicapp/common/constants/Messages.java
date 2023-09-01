@@ -49,6 +49,7 @@ public class Messages {
         private PopularSong() {}
 
         public static final String NOT_EXISTS = "Popular muzik bulunamadı";
+        public static final String MUSIC_NOT_EXISTS = "Bu şarkı popüler muzik listesinde yok";
     }
 
     public static class Song

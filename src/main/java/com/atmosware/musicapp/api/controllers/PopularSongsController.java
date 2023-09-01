@@ -7,8 +7,6 @@ import com.atmosware.musicapp.business.dto.responses.get.GetPopularSongResponse;
 import java.util.List;
 import java.util.UUID;
 
-import com.atmosware.musicapp.entities.PopularSong;
-import com.atmosware.musicapp.repository.PopularSongRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

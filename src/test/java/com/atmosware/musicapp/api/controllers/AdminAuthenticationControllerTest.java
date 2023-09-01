@@ -27,7 +27,7 @@ class AdminAuthenticationControllerTest {
   AdminAuthenticationController underTest;
 
   @Test
-  void register() {
+  void register_shouldRegisterSuccessfully() {
     RegisterRequest request = new RegisterRequest();
     request.setEmail("test@test.com");
     request.setPassword("12345");

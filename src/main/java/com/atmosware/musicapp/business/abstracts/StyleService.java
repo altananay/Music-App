@@ -6,6 +6,8 @@ import com.atmosware.musicapp.business.dto.responses.create.CreateStyleResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetAllStylesResponse;
 import com.atmosware.musicapp.business.dto.responses.get.GetStyleResponse;
 import com.atmosware.musicapp.business.dto.responses.update.UpdateStyleResponse;
+import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 import java.util.UUID;
 

@@ -13,6 +13,7 @@ import java.util.UUID;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -49,7 +50,8 @@ public class StylesController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
         service.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

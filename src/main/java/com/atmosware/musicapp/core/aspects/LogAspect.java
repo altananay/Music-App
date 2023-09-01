@@ -32,6 +32,7 @@ public class LogAspect {
     return proceed;
   }
 
+
   private Map<String, Object> obtainParameters(ProceedingJoinPoint joinPoint) {
     Map<String, Object> parameters = new HashMap<>();
     String[] parameterNames = ((CodeSignature) joinPoint.getSignature()).getParameterNames();
